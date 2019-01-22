@@ -114,7 +114,7 @@ def webhook():
                         buttons = ['借金の減額や見直し', '取り立てと差し押さえ', '身近な人の借金', '過去の借金', '借金の基礎知識', '上記に当てはまるものがない']
                         send_quick_reply(sender_id, text, buttons)
 
-                    elif message_text == '借金の減額や見直し' or message_text == '取り立てと差し押さえ' or message_text == '身近な人の借金' or or message_text == '過去の借金' or message_text == '借金の基礎知識' or message_text == '上記に当てはまるものがない':
+                    elif message_text == '借金の減額や見直し' or message_text == '取り立てと差し押さえ' or message_text == '身近な人の借金' or message_text == '過去の借金' or message_text == '借金の基礎知識' or message_text == '上記に当てはまるものがない':
                         text = 'ぜひ一度、無料相談をご利用下さい！'
                         title = '無料相談のご案内'
                         subtitle = '無料相談のお申し込みはこちらからどうぞ'
