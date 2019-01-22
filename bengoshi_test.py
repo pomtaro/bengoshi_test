@@ -80,47 +80,48 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    if message_text == '離婚' or message_text == '不倫' or message_text == '相続' or message_text == '残業未払い' or message_text == 'パワハラ' or message_text == 'セクハラ':
-                        text = 'あなたの性別を選んでください。'
-                        buttons = ['男性', '女性']
+                    if message_text == '労働について':
+                        text = '具体的に以下からお選びください'
+                        buttons = ['給与について', '労働時間や休暇について', '人間関係のトラブル', '人事異動と就職・退職', '労働契約と社会保険・労災', 'トラブルの相続先と解決方法', '上記に当てはまるものがない']
                         send_quick_reply(sender_id, text, buttons)
 
-                    elif message_text == '男性' or message_text == '女性':
-                        text = '以下から選んでください。'
-                        buttons = ['不倫した', '不倫された']
-                        send_quick_reply(sender_id, text, buttons)
-
-                    elif message_text == '不倫した' or message_text == '不倫された':
-                        text = 'こちらをご覧ください。'
-                        title = '不倫相談'
-                        subtitle = '不倫は最低な行為です！'
-                        url_str = 'https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1075132385'
-                        image_url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVLAZdnZv1gJzt74h7gDiHioQJOxYAL8hdZAi7ulouVYKca6m8KA'
+                    elif message_text == '給与について' or message_text == '労働時間や休暇について' or message_text == '人間関係のトラブル' or message_text == '人事異動と就職・退職' or message_text == '労働契約と社会保険・労災'\
+                            or message_text == 'トラブルの相続先と解決方法' or message_text == '上記に当てはまるものがない':
+                        text = 'ぜひ一度、無料相談をご利用下さい！'
+                        title = '無料相談のご案内'
+                        subtitle = '無料相談のお申し込みはこちらからどうぞ'
+                        url_str = 'https://www.bengo4.com/'
+                        image_url = 'https://www.bengo4.com/img/common/logo_fb_210_210.gif'
                         send_message(sender_id, text)
                         send_url_image(sender_id, title, subtitle, url_str, image_url)
 
-                        text = '続ける場合は以下から選んでください。'
-                        buttons = ['最初から始める']
+                    elif message_text == '離婚・男女問題について':
+                        text = '具体的に以下からお選びください'
+                        buttons = ['お金のトラブル', '離婚と子供', '男女トラブル', '上記に当てはまるものがない']
                         send_quick_reply(sender_id, text, buttons)
 
-                    elif message_text == '最初から始める' or message_text == 'チャットできる人はいますか？' or message_text == '質問があります。':
-                        text = "お困りなことはございませんか？"
-                        buttons = ["離婚", "不倫", "相続", "残業未払い", "パワハラ", "セクハラ"]
-                        send_quick_reply(sender_id, text, buttons)
-
-
-                    elif message_text == 'urlimage':
-                        title = "test title"
-                        subtitle = "test subtitle"
-                        url_str = "https://pixabay.com/"
-                        image_url = "https://cdn.pixabay.com/photo/2018/11/11/16/51/ibis-3809147_960_720.jpg"
-
-                        send_message(sender_id, "こちらをご覧ください。")
+                    elif message_text == 'お金のトラブル' or message_text == '離婚と子供' or message_text == '男女トラブル' or message_text == '上記に当てはまるものがない':
+                        text = 'ぜひ一度、無料相談をご利用下さい！'
+                        title = '無料相談のご案内'
+                        subtitle = '無料相談のお申し込みはこちらからどうぞ'
+                        url_str = 'https://www.bengo4.com/'
+                        image_url = 'https://www.bengo4.com/img/common/logo_fb_210_210.gif'
+                        send_message(sender_id, text)
                         send_url_image(sender_id, title, subtitle, url_str, image_url)
 
-                    else:
-                        buttons = ["A", "B", "C", "D", "E", "F"]
-                        send_quick_reply(sender_id, "please select", buttons)
+                    if message_text == '借金について':
+                        text = '具体的に以下からお選びください'
+                        buttons = ['借金の減額や見直し', '取り立てと差し押さえ', '身近な人の借金', '過去の借金', '借金の基礎知識', '上記に当てはまるものがない']
+                        send_quick_reply(sender_id, text, buttons)
+
+                    elif message_text == '借金の減額や見直し' or message_text == '取り立てと差し押さえ' or message_text == '身近な人の借金' or or message_text == '過去の借金' or message_text == '借金の基礎知識' or message_text == '上記に当てはまるものがない':
+                        text = 'ぜひ一度、無料相談をご利用下さい！'
+                        title = '無料相談のご案内'
+                        subtitle = '無料相談のお申し込みはこちらからどうぞ'
+                        url_str = 'https://www.bengo4.com/'
+                        image_url = 'https://www.bengo4.com/img/common/logo_fb_210_210.gif'
+                        send_message(sender_id, text)
+                        send_url_image(sender_id, title, subtitle, url_str, image_url)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -135,8 +136,8 @@ def webhook():
                     """
 
                     sender_id = messaging_event["sender"]["id"]
-                    text = "お困りなことはございませんか？"
-                    buttons = ["離婚", "不倫", "相続", "残業未払い", "パワハラ", "セクハラ"]
+                    text = "どのようなお悩みでしょうか？"
+                    buttons = ["労働について", "離婚・男女問題について", "借金について"]
                     send_quick_reply(sender_id, text, buttons)
 
     return "ok", 200
