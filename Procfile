@@ -1,0 +1,1 @@
+web: python bengoshi_test.py
