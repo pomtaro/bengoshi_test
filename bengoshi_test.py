@@ -95,6 +95,10 @@ def webhook():
                         send_message(sender_id, text)
                         send_url_image(sender_id, title, subtitle, url_str, image_url)
 
+                        text = '最初から始める場合は、以下のボタンを押してください。'
+                        buttons = ['最初から始める']
+                        send_quick_reply(sender_id, text, buttons)
+
                     elif message_text == '離婚・男女問題について':
                         text = '具体的に以下からお選びください'
                         buttons = ['お金のトラブル', '離婚と子供', '男女トラブル', '上記に当てはまるものがない']
@@ -109,7 +113,11 @@ def webhook():
                         send_message(sender_id, text)
                         send_url_image(sender_id, title, subtitle, url_str, image_url)
 
-                    if message_text == '借金について':
+                        text = '最初から始める場合は、以下のボタンを押してください。'
+                        buttons = ['最初から始める']
+                        send_quick_reply(sender_id, text, buttons)
+
+                    elif message_text == '借金について':
                         text = '具体的に以下からお選びください'
                         buttons = ['借金の減額や見直し', '取り立てと差し押さえ', '身近な人の借金', '過去の借金', '借金の基礎知識', '上記に当てはまるものがない']
                         send_quick_reply(sender_id, text, buttons)
@@ -122,6 +130,16 @@ def webhook():
                         image_url = 'https://www.bengo4.com/img/common/logo_fb_210_210.gif'
                         send_message(sender_id, text)
                         send_url_image(sender_id, title, subtitle, url_str, image_url)
+
+                        text = '最初から始める場合は、以下のボタンを押してください。'
+                        buttons = ['最初から始める']
+                        send_quick_reply(sender_id, text, buttons)
+
+                    elif message_text == '最初から始める':
+                        sender_id = messaging_event["sender"]["id"]
+                        text = "お悩みを教えてください。"
+                        buttons = ["労働について", "離婚・男女問題について", "借金について"]
+                        send_quick_reply(sender_id, text, buttons)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
