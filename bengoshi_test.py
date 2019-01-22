@@ -118,7 +118,7 @@ def webhook():
                         send_quick_reply(sender_id, text, buttons)
 
                     elif message_text == '借金について':
-                        text = '具体的に以下からお選びください'
+                        text = '具体的な内容を、以下からお選びください'
                         buttons = ['借金の減額や見直し', '取り立てと差し押さえ', '身近な人の借金', '過去の借金', '借金の基礎知識', '上記に当てはまるものがない']
                         send_quick_reply(sender_id, text, buttons)
 
