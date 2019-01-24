@@ -60,11 +60,12 @@ def verify():
 
 @app.route('/', methods=['POST'])
 def webhook():
-
     # endpoint for processing incoming messaging events
 
     data = request.get_json()
-#    log(data)  # you may not want to log every incoming message in production, but it's good for testing
+    print('***** post data *****')
+    print(data)
+    #    log(data)  # you may not want to log every incoming message in production, but it's good for testing
 
     if data["object"] == "page":
 
@@ -76,27 +77,21 @@ def webhook():
                         ユーザからメッセージが送られた時に実行される
                     """
 
-                    sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
-                    recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
+                    sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
+                    recipient_id = messaging_event["recipient"][
+                        "id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
                     if message_text == '労働について':
                         text = '具体的に以下からお選びください'
-                        buttons = ['給与について', '労働時間や休暇について', '人間関係のトラブル', '人事異動と就職・退職', '労働契約と社会保険・労災', 'トラブルの相続先と解決方法', '上記に当てはまるものがない']
+                        buttons = ['給与について', '労働時間や休暇について', '人間関係のトラブル', '人事異動と就職・退職', '労働契約と社会保険・労災', 'トラブルの相続先と解決方法',
+                                   '上記に当てはまるものがない']
                         send_quick_reply(sender_id, text, buttons)
 
-                    elif message_text == '給与について' or message_text == '労働時間や休暇について' or message_text == '人間関係のトラブル' or message_text == '人事異動と就職・退職' or message_text == '労働契約と社会保険・労災'\
-                            or message_text == 'トラブルの相続先と解決方法' or message_text == '上記に当てはまるものがない':
-                        text = 'ぜひ一度、無料相談をご利用下さい！'
-                        title = '無料相談のご案内'
-                        subtitle = '無料相談のお申し込みはこちらからどうぞ'
-                        url_str = 'https://www.bengo4.com/'
-                        image_url = 'https://www.bengo4.com/img/common/logo_fb_210_210.gif'
-                        send_message(sender_id, text)
-                        send_url_image(sender_id, title, subtitle, url_str, image_url)
-
-                        text = '最初から始める場合は、以下のボタンを押してください。'
-                        buttons = ['最初から始める']
+                    elif message_text == '給与について' or message_text == '労働時間や休暇について' or message_text == '人間関係のトラブル' \
+                            or message_text == '人事異動と就職・退職' or message_text == '労働契約と社会保険・労災':
+                        text = 'お客様のお力になれるかもしれません！一度ホームページをご覧になってみませんか？'
+                        buttons = ['ホームページを見てみる', '今は見ない']
                         send_quick_reply(sender_id, text, buttons)
 
                     elif message_text == '離婚・男女問題について':
@@ -105,9 +100,18 @@ def webhook():
                         send_quick_reply(sender_id, text, buttons)
 
                     elif message_text == 'お金のトラブル' or message_text == '離婚と子供' or message_text == '男女トラブル' or message_text == '上記に当てはまるものがない':
-                        text = 'ぜひ一度、無料相談をご利用下さい！'
-                        title = '無料相談のご案内'
-                        subtitle = '無料相談のお申し込みはこちらからどうぞ'
+                        text = 'お客様のお力になれるかもしれません！一度ホームページをご覧になってみませんか？'
+                        buttons = ['ホームページを見てみる', '今は見ない']
+                        send_quick_reply(sender_id, text, buttons)
+
+                    elif message_text == 'ホームページを見てみる':
+
+                        global view_count
+                        view_count += 1
+
+                        text = 'ありがとうございます！無料相談もありますので、ぜひご検討ください！'
+                        title = 'ホームページのご案内'
+                        subtitle = '無料相談のお申し込みもこちらから行えます！'
                         url_str = 'https://www.bengo4.com/'
                         image_url = 'https://www.bengo4.com/img/common/logo_fb_210_210.gif'
                         send_message(sender_id, text)
@@ -116,23 +120,25 @@ def webhook():
                         text = '最初から始める場合は、以下のボタンを押してください。'
                         buttons = ['最初から始める']
                         send_quick_reply(sender_id, text, buttons)
+
+                    elif message_text == '今は見ない':
+                        text = 'またお時間があります時にいつでもご覧ください！'
+                        send_message(sender_id, text)
+
+                        text = '他にお悩みはありませんか？'
+                        buttons = ["労働について", "離婚・男女問題について", "借金について"]
+                        send_quick_reply(sender_id, text, buttons)
+
 
                     elif message_text == '借金について':
                         text = '具体的な内容を、以下からお選びください'
                         buttons = ['借金の減額や見直し', '取り立てと差し押さえ', '身近な人の借金', '過去の借金', '借金の基礎知識', '上記に当てはまるものがない']
                         send_quick_reply(sender_id, text, buttons)
 
-                    elif message_text == '借金の減額や見直し' or message_text == '取り立てと差し押さえ' or message_text == '身近な人の借金' or message_text == '過去の借金' or message_text == '借金の基礎知識' or message_text == '上記に当てはまるものがない':
-                        text = 'ぜひ一度、無料相談をご利用下さい！'
-                        title = '無料相談のご案内'
-                        subtitle = '無料相談のお申し込みはこちらからどうぞ'
-                        url_str = 'https://www.bengo4.com/'
-                        image_url = 'https://www.bengo4.com/img/common/logo_fb_210_210.gif'
-                        send_message(sender_id, text)
-                        send_url_image(sender_id, title, subtitle, url_str, image_url)
-
-                        text = '最初から始める場合は、以下のボタンを押してください。'
-                        buttons = ['最初から始める']
+                    elif message_text == '借金の減額や見直し' or message_text == '取り立てと差し押さえ' or message_text == '身近な人の借金'\
+                            or message_text == '過去の借金' or message_text == '借金の基礎知識' or message_text == '上記に当てはまるものがない':
+                        text = 'お客様のお力になれるかもしれません！一度ホームページをご覧になってみませんか？'
+                        buttons = ['ホームページを見てみる', '今は見ない']
                         send_quick_reply(sender_id, text, buttons)
 
                     elif message_text == '最初から始める':
@@ -140,6 +146,10 @@ def webhook():
                         text = "お悩みを教えてください。"
                         buttons = ["労働について", "離婚・男女問題について", "借金について"]
                         send_quick_reply(sender_id, text, buttons)
+
+                    elif message_text == 'カウント':
+                        text = str(view_count)
+                        send_message(sender_id, text)
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
