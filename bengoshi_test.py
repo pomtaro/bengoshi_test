@@ -199,6 +199,14 @@ def webhook():
                             buttons = ['送信する', '修正する']
                             send_quick_reply(sender_id, text, buttons)
 
+                        elif message_text == '修正する':
+
+                            text = 'お名前を送信してください。'
+
+                            info_step = 1
+                            send_message(sender_id, text)
+
+
                         elif message_text == '今はやめとく':
                             text = '最初から始める場合は、以下のボタンを押してください。'
                             buttons = ['最初から始める']
