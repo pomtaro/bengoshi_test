@@ -483,7 +483,8 @@ def send_ok_ng_buttons(recipient_id, sender_id, text):
         "Content-Type": "application/json"
     }
 
-    buttons_postback = ['OK', 'NG']
+    buttons_postback = []
+    buttons = ['OK', 'NG']
 
     for button in buttons:
         postback_dict = {
