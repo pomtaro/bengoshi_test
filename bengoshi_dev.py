@@ -253,6 +253,10 @@ def webhook():
                             buttons = ["D", "E", "F"]
                             send_buttons(sender_id, text, buttons)
 
+                        elif message_text == 'F':
+                            text = 'F is pushed'
+                            send_message(sender_id, text)
+
                     else:
                         text = "すみません、もう一度選択してください。"
                         buttons = ["労働について", "離婚・男女問題について", "借金について"]
