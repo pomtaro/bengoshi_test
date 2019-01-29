@@ -272,6 +272,7 @@ def webhook():
 
                     sender_id = messaging_event["sender"]["id"]
                     message_text = messaging_event["postback"]["title"]
+                    return_id = messaging_event["postback"]["payload"]
 
                     if message_text == 'スタート':
                         text = "どのようなお悩みでしょうか？"
@@ -300,6 +301,14 @@ def webhook():
                     elif message_text == 'F':
                         text = 'F is selected'
                         send_message(sender_id, text)
+
+                    elif message_text == "NG":
+                        text = '申請が拒否されました！ごめんち！'
+                        send_message(return_id, text)
+
+                    elif message_text == "OK":
+                        text = '弁護士に受理されました。弁護士からの連絡をお待ちください。'
+                        send_message(return_id, text)
 
     return "ok", 200
 
