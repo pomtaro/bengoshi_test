@@ -518,7 +518,7 @@ def send_ok_ng_buttons(recipient_id, sender_id, text):
 顧客からボットに送信された個人情報を、ボットから弁護士メッセンジャーへ送信する
 顧客 -> ボット、ボット -> 弁護士
 """
-def send_info_to_lawyer(recipient_id, sender_id, customer_name, customer_name_sub, customer_address, customer_number, content):
+def send_info_to_lawyer(recipient_id, customer_name, customer_name_sub, customer_address, customer_number, content):
     first_text = 'お客様からご連絡が届きました！'
     send_message(recipient_id, first_text)
 
