@@ -243,8 +243,7 @@ def webhook():
 
                         elif message_text == '送信する':
                             content = 'テストコンテンツ'
-                            send_info_to_lawyer(lawyer_id, customer_name, customer_name_sub, customer_address,
-                                                customer_number, content)
+                            send_info_to_lawyer(lawyer_id, customer_name, customer_name_sub, customer_address, customer_number, content)
 
                             text = 'OKかNGを押してください'
                             send_ok_ng_buttons(lawyer_id, sender_id, text)
