@@ -246,16 +246,15 @@ def webhook():
                             send_info_to_lawyer(lawyer_id, customer_name, customer_name_sub, customer_address,
                                                 customer_number, content)
 
+
+
+
                         elif message_text == 'ポスト':
                             text = 'テスト'
                             buttons = ["A", "B", "C"]
                             send_buttons(sender_id, text, buttons)
                             buttons = ["D", "E", "F"]
                             send_buttons(sender_id, text, buttons)
-
-                        elif message_text == 'F':
-                            text = 'F is pushed'
-                            send_message(sender_id, text)
 
                     else:
                         text = "すみません、もう一度選択してください。"
@@ -269,15 +268,37 @@ def webhook():
                     pass
 
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
-                    """
-                        「スタート」を押した時に実行される
-                        ユーザがボットと会話を初めて開始した時
-                    """
 
                     sender_id = messaging_event["sender"]["id"]
-                    text = "どのようなお悩みでしょうか？"
-                    buttons = ["労働について", "離婚・男女問題について", "借金について"]
-                    send_quick_reply(sender_id, text, buttons)
+                    message_text = messaging_event["postback"]["title"]
+
+                    if message_text == 'スタート':
+                        text = "どのようなお悩みでしょうか？"
+                        buttons = ["労働について", "離婚・男女問題について", "借金について"]
+                        send_quick_reply(sender_id, text, buttons)
+
+                    elif message_text == 'A':
+                        text = 'A is selected'
+                        send_message(sender_id, text)
+
+                    elif message_text == 'B':
+                        text = 'B is selected'
+                        send_message(sender_id, text)
+
+                    elif message_text == 'C':
+                        text = 'C is selected'
+                        send_message(sender_id, text)
+
+                    elif message_text == 'D':
+                        text = 'D is selected'
+                        send_message(sender_id, text)
+
+                    elif message_text == 'E':
+                        text = 'E is selected'
+                        send_message(sender_id, text)
+                    elif message_text == 'F':
+                        text = 'F is selected'
+                        send_message(sender_id, text)
 
     return "ok", 200
 
