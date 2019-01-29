@@ -248,7 +248,12 @@ def webhook():
                             text = 'OKかNGを押してください'
                             send_ok_ng_buttons(lawyer_id, sender_id, text)
 
-
+                            text = '送信が完了しました。'
+                            send_message(sender_id, text)
+                            text = '内容を確認致しました後、お客様のご相談に対応可能な弁護士を検索致します。通常2〜3営業日以内にご返信致します。'
+                            send_message(sender_id, text)
+                            text = 'お客様のご相談に対応致しかねる場合もございます。ご理解とご了承をお願い致します。'
+                            send_message(sender_id, text)
 
                         elif message_text == 'ポスト':
                             text = 'テスト'
@@ -303,8 +308,15 @@ def webhook():
                         send_message(sender_id, text)
 
                     elif message_text == "NG":
-                        text = '申請が拒否されました！ごめんち！'
+                        text = '大変申し訳ございません。今回はお客様のご相談にお応えできる弁護士が見つかりませんでした。'
                         send_message(return_id, text)
+                        text = '法的トラブルの総合解決所である、「法テラス」へご相談されることをご検討ください。'
+                        title = '法テラスのご案内'
+                        subtitle = '法テラスは国が設立した法的トラブルの総合案内所です。'
+                        url_str = 'https://www.houterasu.or.jp/'
+                        image_url = 'http://www.aaaqq.gr.jp/info/media/terasu.gif'
+                        send_message(sender_id, text)
+                        send_url_image(sender_id, title, subtitle, url_str, image_url)
 
                     elif message_text == "OK":
                         text = '弁護士に受理されました。弁護士からの連絡をお待ちください。'
