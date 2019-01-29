@@ -248,7 +248,7 @@ def webhook():
 
                         elif message_text == 'ポスト':
                             text = 'テスト'
-                            buttons = ["A", "B", "C"]
+                            buttons = ["A", "B", "C", "D", "E"]
                             send_buttons(sender_id, text, buttons)
 
                     else:
