@@ -246,6 +246,8 @@ def webhook():
                             send_info_to_lawyer(lawyer_id, customer_name, customer_name_sub, customer_address,
                                                 customer_number, content)
 
+                            text = 'OKかNGを押してください'
+                            send_ok_ng_buttons(lawyer_id, sender_id, text)
 
 
 
@@ -465,7 +467,51 @@ def send_buttons(recipient_id, text, buttons):
     requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
 
+def send_ok_ng_buttons(recipient_id, sender_id, text):
+    """
+    :param recipient_id: string: bot送信する相手のID
+    :param title: string: タイトル
+    :param subtitle: string: サブタイトル
+    :param url: string: リンク先のURL
+    :param url_image: string: サムネイル画像が格納されているURL
+    :return: POSTリクエスト
+    """
 
+    params = {
+        "access_token": ACCESS_TOKEN  # os.environ["PAGE_ACCESS_TOKEN"]
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    buttons_postback = ['OK', 'NG']
+
+    for button in buttons:
+        postback_dict = {
+            "type": "postback",
+            "title": button,
+            "payload": sender_id
+        }
+        buttons_postback.append(postback_dict)
+
+
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "button",
+                    "text": text,
+                    "buttons": buttons_postback
+                }
+            }
+        }
+    })
+
+    requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
 
 """
@@ -473,7 +519,7 @@ def send_buttons(recipient_id, text, buttons):
 顧客からボットに送信された個人情報を、ボットから弁護士メッセンジャーへ送信する
 顧客 -> ボット、ボット -> 弁護士
 """
-def send_info_to_lawyer(recipient_id, customer_name, customer_name_sub, customer_address, customer_number, content):
+def send_info_to_lawyer(recipient_id, sender_id, customer_name, customer_name_sub, customer_address, customer_number, content):
     first_text = 'お客様からご連絡が届きました！'
     send_message(recipient_id, first_text)
 
