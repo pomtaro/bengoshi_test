@@ -315,8 +315,8 @@ def webhook():
                         subtitle = '法テラスは国が設立した法的トラブルの総合案内所です。'
                         url_str = 'https://www.houterasu.or.jp/'
                         image_url = 'http://www.aaaqq.gr.jp/info/media/terasu.gif'
-                        send_message(sender_id, text)
-                        send_url_image(sender_id, title, subtitle, url_str, image_url)
+                        send_message(return_id, text)
+                        send_url_image(return_id, title, subtitle, url_str, image_url)
 
                     elif message_text == "OK":
                         text = '弁護士に受理されました。弁護士からの連絡をお待ちください。'
