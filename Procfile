@@ -1,1 +1,1 @@
-web: python bengoshi_test.py
+web: python bengoshi_dev.py
