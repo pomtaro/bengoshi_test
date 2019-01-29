@@ -247,7 +247,9 @@ def webhook():
                                                 customer_number, content)
 
                         elif message_text == 'ポスト':
-                            send_buttons(sender_id, 'テストポストバックボタン')
+                            text = 'テスト'
+                            buttons = ["A", "B", "C"]
+                            send_buttons(sender_id, text, buttons)
 
                     else:
                         text = "すみません、もう一度選択してください。"
@@ -389,7 +391,7 @@ def send_url_image(recipient_id, title, subtitle, url_str, image_url):
     requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
 
-def send_buttons(recipient_id, text):
+def send_buttons(recipient_id, text, buttons):
     """
     :param recipient_id: string: bot送信する相手のID
     :param title: string: タイトル
@@ -405,6 +407,18 @@ def send_buttons(recipient_id, text):
     headers = {
         "Content-Type": "application/json"
     }
+
+    buttons_postback = []
+
+    for button in buttons:
+        postback_dict = {
+            "type": "postback",
+            "title": button,
+            "payload": "postback button payload : {}".format(button)
+        }
+        buttons_postback.append(postback_dict)
+
+
     data = json.dumps({
         "recipient": {
             "id": recipient_id
@@ -415,13 +429,7 @@ def send_buttons(recipient_id, text):
                 "payload": {
                     "template_type": "button",
                     "text": text,
-                    "buttons": [
-                        {
-                            "type": "postback",
-                            "title": "test",
-                            "payload": "postback test"
-                        }
-                    ]
+                    "buttons": buttons_postback
                 }
             }
         }
