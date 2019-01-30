@@ -74,8 +74,6 @@ def verify():
 def webhook():
     # endpoint for processing incoming messaging events
 
-    tree = Tree()
-
     global info_step
 
     data = request.get_json()
@@ -268,7 +266,7 @@ def webhook():
                             send_buttons(sender_id, text, buttons)
                             buttons = ["D", "E", "F"]
                             send_buttons(sender_id, text, buttons)
-                        
+
                     else:
                         text = "すみません、もう一度選択してください。"
                         buttons = ["労働について", "離婚・男女問題について", "借金について"]
