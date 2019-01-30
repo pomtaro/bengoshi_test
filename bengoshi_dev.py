@@ -134,6 +134,8 @@ def webhook():
 
     tree = Tree()
 
+    global info_step
+
     data = request.get_json()
     print('***** post data *****')
     print(data)
@@ -269,7 +271,7 @@ def webhook():
 
 
                         """
-                        global info_step
+                        
 
                         if message_text == '労働について':
                             text = '具体的に以下からお選びください'
