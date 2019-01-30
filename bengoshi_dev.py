@@ -280,6 +280,7 @@ def webhook():
                     return_id = messaging_event["postback"]["payload"]
 
                     if message_text == 'スタート':
+                        send_typing_on(sender_id)
                         text = "どのようなお悩みでしょうか？"
                         buttons = ["労働について", "離婚・男女問題について", "借金について"]
                         send_quick_reply(sender_id, text, buttons)
@@ -559,7 +560,22 @@ def send_info_to_lawyer(recipient_id, customer_name, customer_name_sub, customer
     content_text = content
     send_message(recipient_id, content_text)
 
+def send_typing_on(recipient_id):
+    params = {
+        "access_token": ACCESS_TOKEN  # os.environ["PAGE_ACCESS_TOKEN"]
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
 
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "sender_action": "typing_on"
+    })
+
+    requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
 """
 def log(msg):# , *args, **kwargs):  # simple wrapper for logging to stdout on heroku
