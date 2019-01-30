@@ -94,6 +94,8 @@ def webhook():
                     if messaging_event["message"].get("text"):
                         message_text = messaging_event["message"]["text"]  # the message's text
 
+                        send_typing_on(sender_id)  # インジケータ
+
                         global info_step
 
                         if message_text == '労働について':
@@ -279,8 +281,9 @@ def webhook():
                     message_text = messaging_event["postback"]["title"]
                     return_id = messaging_event["postback"]["payload"]
 
+                    send_typing_on(sender_id)
+
                     if message_text == 'スタート':
-                        send_typing_on(sender_id)
                         text = "どのようなお悩みでしょうか？"
                         buttons = ["労働について", "離婚・男女問題について", "借金について"]
                         send_quick_reply(sender_id, text, buttons)
