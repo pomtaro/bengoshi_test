@@ -161,12 +161,12 @@ def webhook():
                         send_typing_on(sender_id)  # インジケータ
 
                         indexes = tree.search_text(message_text)
-                        if not indexes == 'no matching':
-                            buttons = tree.decide_buttons(indexes)
-                            text = 'test'
-                            send_quick_reply(sender_id, text, buttons)
+#                        if not indexes == 'no matching':
+                        buttons = tree.decide_buttons(indexes)
+                        text = 'test'
+                        send_quick_reply(sender_id, text, buttons)
 
-                        elif message_text == 'ホームページを見てみる':
+                        if message_text == 'ホームページを見てみる':
 
                             global view_count
                             view_count += 1
