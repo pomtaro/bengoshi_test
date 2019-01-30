@@ -32,6 +32,64 @@ chatbot-dev : 'EAAFcwgncLV0BAPduIt9AjwsONBl2MWTlAWX7yVZCSLn28ew5qlDIaOoEZBdkDOYC
 弁護士bot : 'EAAHZBLbwxSdQBAGPjgg3IdGTl76jRSZAfHjjjhuq1B3vTHsfczRwMnHoZBEZADRa7Ui4fYNuVMO5aZCza4K582yQwo0gmV8sojNplVW0PGokf06QavX56sqpfC2PemspkASAo8sTPZC85vt12UpQvg0HxExAmffeKf27cvKGfrTwZDZD'
 """
 
+class Tree():
+    top = ["労働について", "離婚・男女問題について", "借金について"]
+    layer0 = list(top)
+
+    A = ["給与について", "労働時間や休暇について", "人間関係のトラブル",
+         "人事異動と就職・退職", "労働契約と社会保険・労災", "トラブルの相続先と解決方法",
+         "上記にあてはまらない"]
+    B = ["お金のトラブル", "離婚と子ども", "男女トラブル",
+         "上記にあてはまらない"]
+    C = ["借金の減額や見直し", "取り立てと差し押さえ", "身近な人の借金",
+         "過去の借金", "借金の基礎知識", "上記にあてはまらない"]
+    layer1 = list((A, B, C))
+
+    A1 = ["ホームページを見てみる", "今は見ない"]
+    A2 = ["ホームページを見てみる", "今は見ない"]
+    A3 = ["ホームページを見てみる", "今は見ない"]
+    A4 = ["ホームページを見てみる", "今は見ない"]
+    A5 = ["ホームページを見てみる", "今は見ない"]
+    A6 = ["ホームページを見てみる", "今は見ない"]
+    A7 = ["ホームページを見てみる", "今は見ない"]
+    B1 = ["ホームページを見てみる", "今は見ない"]
+    B2 = ["ホームページを見てみる", "今は見ない"]
+    B3 = ["ホームページを見てみる", "今は見ない"]
+    B4 = ["ホームページを見てみる", "今は見ない"]
+    C1 = ["ホームページを見てみる", "今は見ない"]
+    C2 = ["ホームページを見てみる", "今は見ない"]
+    C3 = ["ホームページを見てみる", "今は見ない"]
+    C4 = ["ホームページを見てみる", "今は見ない"]
+    C5 = ["ホームページを見てみる", "今は見ない"]
+    C6 = ["ホームページを見てみる", "今は見ない"]
+    layer2 = list((list((A1, A2, A3, A4, A5, A6, A7)),
+                   list((B1, B2, B3, B4)),
+                   list((C1, C2, C3, C4, C5, C6))))
+
+    layers = []
+    layers.append(layer0)
+    layers.append(layer1)
+    layers.append(layer2)
+
+    def search_text(self, message_text):
+        for layer0_number, text0 in enumerate(self.layer0):
+            if text0 == message_text:
+                return [layer0_number]
+            for layer1_number, text1 in enumerate(self.layer1[layer0_number]):
+                if text1 == message_text:
+                    return [layer0_number, layer1_number]
+                for layer2_number, text2 in enumerate(self.layer2[layer0_number][layer1_number]):
+                    if text2 == message_text:
+                        return [layer0_number, layer1_number, layer2_number]
+        return 'no matching'
+
+    def decide_buttons(self, indexes):
+        if len(indexes) == 1:
+            buttons = self.layers[len(indexes)][indexes[0]]
+            return buttons
+        elif len(indexes) == 2:
+            buttons = self.layers[len(indexes)][indexes[0]][indexes[1]]
+            return buttons
 
 
 def send_get_started():
@@ -101,33 +159,9 @@ def webhook():
                         send_typing_on(sender_id)  # インジケータ
 
                         indexes = tree.search_text(message_text)
-                        buttons = tree.decide_buttons(indexes)
-                        text = 'test'
-                        send_quick_reply(sender_id, text, buttons)
-
-                        """
-                        global info_step
-
-                        if message_text == '労働について':
-                            text = '具体的に以下からお選びください'
-                            buttons = ['給与について', '労働時間や休暇について', '人間関係のトラブル', '人事異動と就職・退職', '労働契約と社会保険・労災',
-                                       'トラブルの相続先と解決方法', '上記に当てはまるものがない']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == '給与について' or message_text == '労働時間や休暇について' or message_text == '人間関係のトラブル' \
-                                or message_text == '人事異動と就職・退職' or message_text == '労働契約と社会保険・労災':
-                            text = 'お客様のお力になれるかもしれません！一度ホームページをご覧になってみませんか？'
-                            buttons = ['ホームページを見てみる', '今は見ない']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == '離婚・男女問題について':
-                            text = '具体的に以下からお選びください'
-                            buttons = ['お金のトラブル', '離婚と子供', '男女トラブル', '上記に当てはまるものがない']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == 'お金のトラブル' or message_text == '離婚と子供' or message_text == '男女トラブル' or message_text == '上記に当てはまるものがない':
-                            text = 'お客様のお力になれるかもしれません！一度ホームページをご覧になってみませんか？'
-                            buttons = ['ホームページを見てみる', '今は見ない']
+                        if not indexes == 'no matching':
+                            buttons = tree.decide_buttons(indexes)
+                            text = 'test'
                             send_quick_reply(sender_id, text, buttons)
 
                         elif message_text == 'ホームページを見てみる':
@@ -231,6 +265,34 @@ def webhook():
                             text = '他にお悩みはありませんか？'
                             buttons = ["労働について", "離婚・男女問題について", "借金について"]
                             send_quick_reply(sender_id, text, buttons)
+
+
+
+                        """
+                        global info_step
+
+                        if message_text == '労働について':
+                            text = '具体的に以下からお選びください'
+                            buttons = ['給与について', '労働時間や休暇について', '人間関係のトラブル', '人事異動と就職・退職', '労働契約と社会保険・労災',
+                                       'トラブルの相続先と解決方法', '上記に当てはまるものがない']
+                            send_quick_reply(sender_id, text, buttons)
+
+                        elif message_text == '給与について' or message_text == '労働時間や休暇について' or message_text == '人間関係のトラブル' \
+                                or message_text == '人事異動と就職・退職' or message_text == '労働契約と社会保険・労災':
+                            text = 'お客様のお力になれるかもしれません！一度ホームページをご覧になってみませんか？'
+                            buttons = ['ホームページを見てみる', '今は見ない']
+                            send_quick_reply(sender_id, text, buttons)
+
+                        elif message_text == '離婚・男女問題について':
+                            text = '具体的に以下からお選びください'
+                            buttons = ['お金のトラブル', '離婚と子供', '男女トラブル', '上記に当てはまるものがない']
+                            send_quick_reply(sender_id, text, buttons)
+
+                        elif message_text == 'お金のトラブル' or message_text == '離婚と子供' or message_text == '男女トラブル' or message_text == '上記に当てはまるものがない':
+                            text = 'お客様のお力になれるかもしれません！一度ホームページをご覧になってみませんか？'
+                            buttons = ['ホームページを見てみる', '今は見ない']
+                            send_quick_reply(sender_id, text, buttons)
+
 
 
                         elif message_text == '借金について':
@@ -591,64 +653,6 @@ def send_typing_on(recipient_id):
     requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     time.sleep(0.5)
 
-class Tree():
-    top = ["労働について", "離婚・男女問題について", "借金について"]
-    layer0 = list(top)
-
-    A = ["給与について", "労働時間や休暇について", "人間関係のトラブル",
-         "人事異動と就職・退職", "労働契約と社会保険・労災", "トラブルの相続先と解決方法",
-         "上記にあてはまらない"]
-    B = ["お金のトラブル", "離婚と子ども", "男女トラブル",
-         "上記にあてはまらない"]
-    C = ["借金の減額や見直し", "取り立てと差し押さえ", "身近な人の借金",
-         "過去の借金", "借金の基礎知識", "上記にあてはまらない"]
-    layer1 = list((A, B, C))
-
-    A1 = ["ホームページを見てみる", "今は見ない"]
-    A2 = ["ホームページを見てみる", "今は見ない"]
-    A3 = ["ホームページを見てみる", "今は見ない"]
-    A4 = ["ホームページを見てみる", "今は見ない"]
-    A5 = ["ホームページを見てみる", "今は見ない"]
-    A6 = ["ホームページを見てみる", "今は見ない"]
-    A7 = ["ホームページを見てみる", "今は見ない"]
-    B1 = ["ホームページを見てみる", "今は見ない"]
-    B2 = ["ホームページを見てみる", "今は見ない"]
-    B3 = ["ホームページを見てみる", "今は見ない"]
-    B4 = ["ホームページを見てみる", "今は見ない"]
-    C1 = ["ホームページを見てみる", "今は見ない"]
-    C2 = ["ホームページを見てみる", "今は見ない"]
-    C3 = ["ホームページを見てみる", "今は見ない"]
-    C4 = ["ホームページを見てみる", "今は見ない"]
-    C5 = ["ホームページを見てみる", "今は見ない"]
-    C6 = ["ホームページを見てみる", "今は見ない"]
-    layer2 = list((list((A1, A2, A3, A4, A5, A6, A7)),
-                   list((B1, B2, B3, B4)),
-                   list((C1, C2, C3, C4, C5, C6))))
-
-    layers = []
-    layers.append(layer0)
-    layers.append(layer1)
-    layers.append(layer2)
-
-    def search_text(self, message_text):
-        for layer0_number, text0 in enumerate(self.layer0):
-            if text0 == message_text:
-                return [layer0_number]
-            for layer1_number, text1 in enumerate(self.layer1[layer0_number]):
-                if text1 == message_text:
-                    return [layer0_number, layer1_number]
-                for layer2_number, text2 in enumerate(self.layer2[layer0_number][layer1_number]):
-                    if text2 == message_text:
-                        return [layer0_number, layer1_number, layer2_number]
-        return 'no matching'
-
-    def decide_buttons(self, indexes):
-        if len(indexes) == 1:
-            buttons = self.layers[len(indexes)][indexes[0]]
-            return buttons
-        elif len(indexes) == 2:
-            buttons = self.layers[len(indexes)][indexes[0]][indexes[1]]
-            return buttons
 
 
 
