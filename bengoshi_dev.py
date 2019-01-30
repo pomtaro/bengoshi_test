@@ -8,6 +8,7 @@ import sys
 import json
 from datetime import datetime
 import time
+from Tree import Tree
 
 import requests
 from flask import Flask, request
@@ -75,6 +76,7 @@ def webhook():
     # endpoint for processing incoming messaging events
 
     global info_step
+    global view_count
 
     data = request.get_json()
     print('***** post data *****')
@@ -125,7 +127,6 @@ def webhook():
 
                         elif message_text == 'ホームページを見てみる':
 
-                            global view_count
                             view_count += 1
 
                             text = 'ありがとうございます！無料相談もありますので、ぜひご検討ください！'
