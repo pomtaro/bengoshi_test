@@ -7,6 +7,7 @@ import os
 import sys
 import json
 from datetime import datetime
+import time
 
 import requests
 from flask import Flask, request
@@ -579,6 +580,7 @@ def send_typing_on(recipient_id):
     })
 
     requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+    time.sleep(0.5)
 
 """
 def log(msg):# , *args, **kwargs):  # simple wrapper for logging to stdout on heroku
