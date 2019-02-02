@@ -528,7 +528,7 @@ def send_carousel(recipient_id):
                             "buttons": [
                                 {
                                     "type": "postback",
-                                    "title": "test1 :)",
+                                    "title": "test1" + happy,
                                     "payload": "postback payload2"
                                 }, {
                                     "type": "postback",
