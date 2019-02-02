@@ -532,7 +532,7 @@ def send_carousel(recipient_id):
                                     "payload": "postback payload2"
                                 }, {
                                     "type": "postback",
-                                    "title": "test2",
+                                    "title": "test2" + "👍",
                                     "payload": "postback payload2"
                                 }
                             ]
