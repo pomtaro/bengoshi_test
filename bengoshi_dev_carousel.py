@@ -335,6 +335,12 @@ def webhook():
                         text = '弁護士に受理されました。弁護士からの連絡をお待ちください。'
                         send_message(return_id, text)
 
+                    else:
+                        text = "もう一度最初から始めてください。"
+                        buttons = ["労働について", "離婚・男女問題について", "借金について"]
+                        send_quick_reply(sender_id, text, buttons)
+
+
     return "ok", 200
 
 
@@ -522,7 +528,7 @@ def send_carousel(recipient_id):
                             "buttons": [
                                 {
                                     "type": "postback",
-                                    "title": "test1",
+                                    "title": "test1 :)",
                                     "payload": "postback payload2"
                                 }, {
                                     "type": "postback",
