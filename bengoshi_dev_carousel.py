@@ -530,6 +530,38 @@ def send_carousel(recipient_id):
                                     "payload": "postback payload2"
                                 }
                             ]
+                        },
+                        {
+                            "title": "Carousel Test",
+                            "image_url": "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
+                            "subtitle": "Carousel Test",
+                            "buttons": [
+                                {
+                                    "type": "postback",
+                                    "title": "test1",
+                                    "payload": "postback payload2"
+                                }, {
+                                    "type": "postback",
+                                    "title": "test2",
+                                    "payload": "postback payload2"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Carousel Test",
+                            "image_url": "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
+                            "subtitle": "Carousel Test",
+                            "buttons": [
+                                {
+                                    "type": "postback",
+                                    "title": "test1",
+                                    "payload": "postback payload2"
+                                }, {
+                                    "type": "postback",
+                                    "title": "test2",
+                                    "payload": "postback payload2"
+                                }
+                            ]
                         }
                     ]
                 }
