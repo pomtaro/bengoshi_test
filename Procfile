@@ -1,1 +1,1 @@
-web: python bengoshi_dev.py
+web: python bengoshi_dev_carousel.py
