@@ -271,7 +271,13 @@ def webhook():
                             send_buttons(sender_id, text, buttons)
 
                         elif message_text == 'カルーセル':
-                            send_carousel(sender_id)
+                            titles = ['carousel1', 'carousel2', 'carousel3']
+                            image_urls = ['https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg',
+                                          'https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg',
+                                          'https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg']
+                            subtitles = ['carousl1', 'carousel2', 'carousel3']
+                            buttons_titles = [['button1'], ['button1', 'button2'], ['button1', 'button2', 'button3']]
+                            send_carousel(sender_id, titles, image_urls, subtitles, buttons_titles)
 
                     else:
                         text = "すみません、もう一度選択してください。"
@@ -504,13 +510,65 @@ def send_buttons(recipient_id, text, buttons):
 
     requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
-def send_carousel(recipient_id):
+def send_carousel(recipient_id, titles, image_urls, subtitles, buttons_titles):
+
+    """
+    :param recipient_id: String:
+    :param titles: List: String
+    :param image_urls: List: String
+    :param subtitles: List: String
+    :param buttons_titles: List: List: String
+    :return:
+    """
+
+
     params = {
         "access_token": ACCESS_TOKEN  # os.environ["PAGE_ACCESS_TOKEN"]
     }
     headers = {
         "Content-Type": "application/json"
     }
+
+    elements = []
+    carousel_number = len(titles)
+
+    for num in range(carousel_number):
+
+        buttons = []
+
+        for button_title in buttons_titles[num]:
+            button_dict = {
+                "type": "postback",
+                "title": button_title,
+                "payload": "payload : " + button_title
+            }
+            buttons.append(button_dict)
+
+        carousel_dict = {
+            "title": titles[num],
+            "image_url": image_urls[num],
+            "subtitle": subtitles[num],
+            "buttons": buttons
+        }
+        elements.append(carousel_dict)
+
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": elements
+                }
+            }
+        }
+    })
+
+
+    """
     data = json.dumps({
         "recipient": {
             "id": recipient_id
@@ -528,7 +586,7 @@ def send_carousel(recipient_id):
                             "buttons": [
                                 {
                                     "type": "postback",
-                                    "title": "test1" + u'\U0001F604',
+                                    "title": "test1",
                                     "payload": "postback payload2"
                                 }, {
                                     "type": "postback",
@@ -574,6 +632,7 @@ def send_carousel(recipient_id):
             }
         }
     })
+    """
 
     requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
