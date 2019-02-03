@@ -303,9 +303,18 @@ def webhook():
                     send_typing_on(sender_id)
 
                     if message_text == 'スタート':
-                        text = "どのようなお悩みでしょうか？"
-                        buttons = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
-                        send_quick_reply(sender_id, text, buttons)
+                        text = 'どのようなお悩みでしょうか？'
+                        send_message(sender_id, text)
+
+                        titles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
+                        image_urls = ["https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
+                                      "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
+                                      "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
+                                      "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
+                                      "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg"]
+                        subtitles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
+                        buttons_titles = [["性格の不一致"], ["浪費、借金"], ["DV"], ["浮気、男女問題"], ["その他"]]
+                        send_carousel(sender_id, titles, image_urls, subtitles, buttons_titles)
 
                     elif message_text == 'A':
                         text = 'A is selected'
@@ -501,6 +510,64 @@ def send_buttons(recipient_id, text, buttons):
                     "template_type": "button",
                     "text": text,
                     "buttons": buttons_postback
+                }
+            }
+        }
+    })
+
+    requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
+
+def send_carousel(recipient_id, titles, image_urls, subtitles, buttons_titles):
+    """
+    :param recipient_id: String:
+    :param titles: List: String
+    :param image_urls: List: String
+    :param subtitles: List: String
+    :param buttons_titles: List: List: String
+    :return:
+    """
+
+    params = {
+        "access_token": ACCESS_TOKEN  # os.environ["PAGE_ACCESS_TOKEN"]
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    elements = []
+    carousel_number = len(titles)
+
+    for num in range(carousel_number):
+
+        buttons = []
+
+        for button_title in buttons_titles[num]:
+            button_dict = {
+                "type": "postback",
+                "title": button_title,
+                "payload": "payload : " + button_title
+            }
+            buttons.append(button_dict)
+
+        carousel_dict = {
+            "title": titles[num],
+            "image_url": image_urls[num],
+            "subtitle": subtitles[num],
+            "buttons": buttons
+        }
+        elements.append(carousel_dict)
+
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": elements
                 }
             }
         }
