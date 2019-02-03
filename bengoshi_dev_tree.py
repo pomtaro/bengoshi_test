@@ -134,11 +134,11 @@ def webhook():
                         send_message(sender_id, text)
 
                         titles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
-                        image_urls = ["https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
-                                      "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
-                                      "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
-                                      "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
-                                      "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg"]
+                        image_urls = ["https://github.com/pomtaro/bengoshi_test/blob/master/pic/lover-1822498_1920.jpg",
+                                      "https://github.com/pomtaro/bengoshi_test/blob/master/pic/lover-1822498_1920.jpg",
+                                      "https://github.com/pomtaro/bengoshi_test/blob/master/pic/lover-1822498_1920.jpg",
+                                      "https://github.com/pomtaro/bengoshi_test/blob/master/pic/lover-1822498_1920.jpg",
+                                      "https://github.com/pomtaro/bengoshi_test/blob/master/pic/lover-1822498_1920.jpg"]
                         subtitles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
                         buttons_titles = [["性格の不一致"], ["浪費、借金"], ["DV"], ["浮気、男女問題"], ["その他"]]
                         send_carousel(sender_id, titles, image_urls, subtitles, buttons_titles)
