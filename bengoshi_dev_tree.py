@@ -110,179 +110,6 @@ def webhook():
 
                         send_quick_reply(sender_id, text, buttons)
 
-
-
-
-
-
-                        """  treeなしの場合
-                        if message_text == '労働について':
-                            text = '具体的に以下からお選びください'
-                            buttons = ['給与について', '労働時間や休暇について', '人間関係のトラブル', '人事異動と就職・退職', '労働契約と社会保険・労災',
-                                       'トラブルの相続先と解決方法', '上記に当てはまるものがない']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == '給与について' or message_text == '労働時間や休暇について' or message_text == '人間関係のトラブル' \
-                                or message_text == '人事異動と就職・退職' or message_text == '労働契約と社会保険・労災':
-                            text = 'お客様のお力になれるかもしれません！一度ホームページをご覧になってみませんか？'
-                            buttons = ['ホームページを見てみる', '今は見ない']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == '離婚・男女問題について':
-                            text = '具体的に以下からお選びください'
-                            buttons = ['お金のトラブル', '離婚と子供', '男女トラブル', '上記に当てはまるものがない']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == 'お金のトラブル' or message_text == '離婚と子供' or message_text == '男女トラブル' or message_text == '上記に当てはまるものがない':
-                            text = 'お客様のお力になれるかもしれません！一度ホームページをご覧になってみませんか？'
-                            buttons = ['ホームページを見てみる', '今は見ない']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == 'ホームページを見てみる':
-
-                            view_count += 1
-
-                            text = 'ありがとうございます！無料相談もありますので、ぜひご検討ください！'
-                            title = 'ホームページのご案内'
-                            subtitle = '無料相談のお申し込みもこちらから行えます！'
-                            url_str = 'https://www.bengo4.com/'
-                            image_url = 'https://www.bengo4.com/img/common/logo_fb_210_210.gif'
-                            send_message(sender_id, text)
-                            send_url_image(sender_id, title, subtitle, url_str, image_url)
-
-                            text = '弊事務所の弁護士と直接やりとりすることもできます！'
-                            buttons = ['直接やりとりする', '今はやめとく']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == '直接やりとりする':
-                            text = 'ありがとうございます！お名前、ふりがな、メールアドレス、電話番号が必要となります。'
-                            send_message(sender_id, text)
-
-                            text = 'お名前を送信してください。'
-
-                            info_step = 1
-                            send_message(sender_id, text)
-
-                        elif info_step == 1:
-                            text = 'ふりがなを送信してください。'
-
-                            info_step = 2
-                            global customer_name
-                            customer_name = message_text
-
-                            send_message(sender_id, text)
-
-                        elif info_step == 2:
-                            text = 'メールアドレスを入力してください。'
-
-                            info_step = 3
-                            global customer_name_sub
-                            customer_name_sub = message_text
-
-                            send_message(sender_id, text)
-
-                        elif info_step == 3:
-                            text = '電話番号を入力してください'
-
-                            info_step = 4
-                            global customer_address
-                            customer_address = message_text
-
-                            send_message(sender_id, text)
-
-                        elif info_step == 4:
-                            text = '必要な情報は以上です、ありがとうございました！'
-
-                            info_step = 0
-                            global customer_number
-                            customer_number = message_text
-                            send_message(sender_id, text)
-
-                            text = '内容を確認してください。'
-                            buttons = ['確認する', '修正する']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == '確認する':
-                            text = '以下の内容でよろしいですか？'
-                            send_message(sender_id, text)
-                            text = 'お名前 : {}'.format(customer_name)
-                            send_message(sender_id, text)
-                            text = 'ふりがな : {}'.format(customer_name_sub)
-                            send_message(sender_id, text)
-                            text = 'メールアドレス : {}'.format(customer_address)
-                            send_message(sender_id, text)
-                            text = '電話番号 : {}'.format(customer_number)
-                            send_message(sender_id, text)
-
-                            text = 'よろしければ、以下の「送信する」ボタンを押してください。'
-                            buttons = ['送信する', '修正する']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == '修正する':
-
-                            text = 'お名前を送信してください。'
-
-                            info_step = 1
-                            send_message(sender_id, text)
-
-
-                        elif message_text == '今はやめとく':
-                            text = '最初から始める場合は、以下のボタンを押してください。'
-                            buttons = ['最初から始める']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == '今は見ない':
-                            text = 'またお時間があります時にいつでもご覧ください！'
-                            send_message(sender_id, text)
-
-                            text = '他にお悩みはありませんか？'
-                            buttons = ["労働について", "離婚・男女問題について", "借金について"]
-                            send_quick_reply(sender_id, text, buttons)
-
-
-                        elif message_text == '借金について':
-                            text = '具体的な内容を、以下からお選びください'
-                            buttons = ['借金の減額や見直し', '取り立てと差し押さえ', '身近な人の借金', '過去の借金', '借金の基礎知識', '上記に当てはまるものがない']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == '借金の減額や見直し' or message_text == '取り立てと差し押さえ' or message_text == '身近な人の借金' or message_text == '過去の借金' or message_text == '借金の基礎知識' or message_text == '上記に当てはまるものがない':
-                            text = 'お客様のお力になれるかもしれません！一度ホームページをご覧になってみませんか？'
-                            buttons = ['ホームページを見てみる', '今は見ない']
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == '最初から始める':
-                            sender_id = messaging_event["sender"]["id"]
-                            text = "お悩みを教えてください。"
-                            buttons = ["労働について", "離婚・男女問題について", "借金について"]
-                            send_quick_reply(sender_id, text, buttons)
-
-                        elif message_text == 'カウント':
-                            text = str(view_count)
-                            send_message(sender_id, text)
-
-                        elif message_text == '送信する':
-                            content = 'テストコンテンツ'
-                            send_info_to_lawyer(lawyer_id, customer_name, customer_name_sub, customer_address,
-                                                customer_number, content)
-
-                            text = 'OKかNGを押してください'
-                            send_ok_ng_buttons(lawyer_id, sender_id, text)
-
-                            text = '送信が完了しました。'
-                            send_message(sender_id, text)
-                            text = '内容を確認致しました後、お客様のご相談に対応可能な弁護士を検索致します。通常2〜3営業日以内にご返信致します。'
-                            send_message(sender_id, text)
-                            text = 'お客様のご相談に対応致しかねる場合もございます。ご理解とご了承をお願い致します。'
-                            send_message(sender_id, text)
-
-                        elif message_text == 'ポスト':
-                            text = 'テスト'
-                            buttons = ["A", "B", "C"]
-                            send_buttons(sender_id, text, buttons)
-                            buttons = ["D", "E", "F"]
-                            send_buttons(sender_id, text, buttons)
-                        """
-
                     else:
                         text = "すみません、もう一度選択してください。"
                         buttons = ["労働について", "離婚・男女問題について", "借金について"]
@@ -353,6 +180,25 @@ def webhook():
                     elif message_text == "OK":
                         text = '弁護士に受理されました。弁護士からの連絡をお待ちください。'
                         send_message(return_id, text)
+
+                    else:
+                        indexes = tree.search_text(message_text)
+                        text = tree.decide_text(indexes)
+                        send_message(sender_id, text)
+
+                        titles = tree.decide_buttons(indexes)
+                        image_urls = []
+                        buttons_titles = []
+                        for title in titles:
+                            button = []
+                            button.append(title)
+                            image_urls.append("https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg")
+                            buttons_titles.append(button)
+                        subtitles = titles
+
+                        send_carousel(sender_id, titles, image_urls, subtitles, buttons_titles)
+
+
 
     return "ok", 200
 
