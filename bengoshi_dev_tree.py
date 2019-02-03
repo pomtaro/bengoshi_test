@@ -134,8 +134,8 @@ def webhook():
                         send_message(sender_id, text)
 
                         titles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
-                        image_urls = ["https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/test.png",
-                                      "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/test.png",
+                        image_urls = ["https://github.com/pomtaro/bengoshi_test/blob/master/pic/test.png?raw=true",
+                                      "https://github.com/pomtaro/bengoshi_test/blob/master/pic/test.png?raw=true",
                                       "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/lover-1822498_1920.jpg",
                                       "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/lover-1822498_1920.jpg",
                                       "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/lover-1822498_1920.jpg"]
