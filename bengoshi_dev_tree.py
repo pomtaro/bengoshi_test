@@ -136,7 +136,7 @@ def webhook():
                         titles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
                         image_urls = ["https://github.com/pomtaro/bengoshi_test/blob/master/pic/test.png?raw=true",
                                       "https://github.com/pomtaro/bengoshi_test/blob/master/pic/test.png?raw=true",
-                                      "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/lover-1822498_1920.jpg",
+                                      "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/1993603_s_wi/b93f1f4194eb76b2c1e64c5a4d844ae2_s.jpg",
                                       "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/lover-1822498_1920.jpg",
                                       "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/lover-1822498_1920.jpg"]
                         subtitles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
