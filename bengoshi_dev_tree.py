@@ -129,7 +129,7 @@ def webhook():
 
                     send_typing_on(sender_id)
 
-                    if message_text == 'スタート':
+                    if message_text == 'スタート' or message_text == 'Get Started':
                         text = 'どのようなお悩みでしょうか？'
                         send_message(sender_id, text)
 
