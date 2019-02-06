@@ -137,7 +137,7 @@ def webhook():
                         image_urls = ["https://github.com/pomtaro/bengoshi_test/blob/master/pic/test.png?raw=true",
                                       "https://github.com/pomtaro/bengoshi_test/blob/master/pic/test.png?raw=true",
                                       "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/1993603_s_wi/b93f1f4194eb76b2c1e64c5a4d844ae2_s.jpg",
-                                      "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4.png",
+                                      "https://github.com/pomtaro/bengoshi_test/blob/master/pic_bot/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4.png?raw=true",
                                       "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/lover-1822498_1920.jpg"]
                         subtitles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
                         buttons_titles = [["性格の不一致"], ["浪費、借金"], ["DV"], ["浮気、男女問題"], ["その他"]]
