@@ -139,7 +139,7 @@ def webhook():
                         waste_debt = 'https://github.com/pomtaro/bengoshi_test/blob/master/pic_bot/' \
                                      '%E6%B5%AA%E8%B2%BB%E3%83%BB%E5%80%9F%E9%87%91/' \
                                      '%E6%B5%AA%E8%B2%BB%E3%83%BB%E5%80%9F%E9%87%91.png?raw=true'
-                        dv = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/DV/DV.png'
+                        dv = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/DV/DV2.png'
                         unfaithful_sexualproblem = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/' \
                                                    'pic_bot/%E6%B5%AE%E6%B0%97%E3%83%BB%E7%94%B7%E5%A5%B3%E5%95%8F%E9%A1%8C/' \
                                                    '%E6%B5%AE%E6%B0%97%E3%83%BB%E7%94%B7%E5%A5%B3%E5%95%8F%E9%A1%8C.png'
