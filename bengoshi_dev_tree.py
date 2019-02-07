@@ -134,11 +134,23 @@ def webhook():
                         send_message(sender_id, text)
 
                         titles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
-                        image_urls = ["https://github.com/pomtaro/bengoshi_test/blob/master/pic_bot/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4.png?raw=true",
-                                      "https://github.com/pomtaro/bengoshi_test/blob/master/pic_bot/%E6%B5%AA%E8%B2%BB%E3%83%BB%E5%80%9F%E9%87%91/%E6%B5%AA%E8%B2%BB%E3%83%BB%E5%80%9F%E9%87%91.png?raw=true",
-                                      "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/DV/DV.png",
-                                      "https://github.com/pomtaro/bengoshi_test/blob/master/pic_bot/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4.png?raw=true",
-                                      "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic/lover-1822498_1920.jpg"]
+
+                        mismatch_of_personality = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/' \
+                                                  'pic_bot/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4/' \
+                                                  '%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4.png'
+                        waste_debt = 'https://github.com/pomtaro/bengoshi_test/blob/master/pic_bot/' \
+                                     '%E6%B5%AA%E8%B2%BB%E3%83%BB%E5%80%9F%E9%87%91/' \
+                                     '%E6%B5%AA%E8%B2%BB%E3%83%BB%E5%80%9F%E9%87%91.png?raw=true'
+                        dv = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/DV/DV.png'
+                        unfaithful_sexualproblem = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/' \
+                                                   'pic_bot/%E6%B5%AE%E6%B0%97%E3%83%BB%E7%94%B7%E5%A5%B3%E5%95%8F%E9%A1%8C/' \
+                                                   '%E6%B5%AE%E6%B0%97%E3%83%BB%E7%94%B7%E5%A5%B3%E5%95%8F%E9%A1%8C.png'
+                        other = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/' \
+                                '%E3%81%9D%E3%81%AE%E4%BB%96/%E3%81%9D%E3%81%AE%E4%BB%96.png'
+
+
+
+                        image_urls = [mismatch_of_personality, waste_debt, dv, unfaithful_sexualproblem, other]
                         subtitles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
                         buttons_titles = [["性格の不一致"], ["浪費、借金"], ["DV"], ["浮気、男女問題"], ["その他"]]
                         send_carousel(sender_id, titles, image_urls, subtitles, buttons_titles)
