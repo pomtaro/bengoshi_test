@@ -568,71 +568,7 @@ def send_carousel(recipient_id, titles, image_urls, subtitles, buttons_titles):
     })
 
 
-    """
-    data = json.dumps({
-        "recipient": {
-            "id": recipient_id
-        },
-        "message": {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements": [
-                        {
-                            "title": "Carousel Test",
-                            "image_url": "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
-                            "subtitle": "Carousel Test",
-                            "buttons": [
-                                {
-                                    "type": "postback",
-                                    "title": "test1",
-                                    "payload": "postback payload2"
-                                }, {
-                                    "type": "postback",
-                                    "title": "test2" + "👍",
-                                    "payload": "postback payload2"
-                                }
-                            ]
-                        },
-                        {
-                            "title": "Carousel Test",
-                            "image_url": "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
-                            "subtitle": "Carousel Test",
-                            "buttons": [
-                                {
-                                    "type": "postback",
-                                    "title": "test1",
-                                    "payload": "postback payload2"
-                                }, {
-                                    "type": "postback",
-                                    "title": "test2",
-                                    "payload": "postback payload2"
-                                }
-                            ]
-                        },
-                        {
-                            "title": "Carousel Test",
-                            "image_url": "https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg",
-                            "subtitle": "Carousel Test",
-                            "buttons": [
-                                {
-                                    "type": "postback",
-                                    "title": "test1",
-                                    "payload": "postback payload2"
-                                }, {
-                                    "type": "postback",
-                                    "title": "test2",
-                                    "payload": "postback payload2"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-        }
-    })
-    """
+
 
     requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
