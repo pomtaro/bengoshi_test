@@ -133,7 +133,7 @@ def webhook():
                         text = 'どのようなお悩みでしょうか？'
                         send_message(sender_id, text)
 
-                        titles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
+                        titles = ["性格の不一致だよ", "浪費、借金", "DV", "浮気、男女問題", "その他"]
 
                         mismatch_of_personality = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4.png'
                         waste_debt = 'https://github.com/pomtaro/bengoshi_test/blob/master/pic_bot/' \
