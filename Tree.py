@@ -175,7 +175,7 @@ class Tree():
     def decide_images(self, indexes):
         if len(indexes) == 1:
             images = self.layers_images[len(indexes)][indexes[0]]
-            return buttons
+            return images
         elif len(indexes) == 2:
             images = self.layers_images[len(indexes)][indexes[0]][indexes[1]]
             return images
