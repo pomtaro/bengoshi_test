@@ -196,12 +196,11 @@ def webhook():
                         send_message(sender_id, text)
 
                         titles = tree.decide_buttons(indexes)
-                        image_urls = []
+                        image_urls = tree.decide_images(indexes)
                         buttons_titles = []
                         for title in titles:
                             button = []
                             button.append(title)
-                            image_urls.append("https://cdn.pixabay.com/photo/2016/11/14/03/35/lover-1822498_960_720.jpg")
                             buttons_titles.append(button)
                         subtitles = titles
 
