@@ -153,8 +153,8 @@ def webhook():
                                 info_step = 1
 
                             elif indexes == [4, 0]: # OK2
-                                text_first = guidance.decide_text_first([indexes])
-                                buttons = guidance.decide_buttons([indexes])
+                                text_first = guidance.decide_text_first(indexes)
+                                buttons = guidance.decide_buttons(indexes)
                                 send_quick_reply(sender_id, text_first, buttons)
                             elif indexes == [5, 0]:  # 送信する
                                 content = 'テストコンテンツ'
