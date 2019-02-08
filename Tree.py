@@ -32,28 +32,28 @@ class Tree():
     layer1 = list((A, B, C, D, E))
     text1 = list((tA, tB, tC, tD, tE))
 
-    A1 = ["ホームページを見てみる", "今は見ない"]
-    A2 = ["ホームページを見てみる", "今は見ない"]
-    A3 = ["ホームページを見てみる", "今は見ない"]
-    A4 = ["ホームページを見てみる", "今は見ない"]
-    A5 = ["ホームページを見てみる", "今は見ない"]
-    A6 = ["ホームページを見てみる", "今は見ない"]
-    A7 = ["ホームページを見てみる", "今は見ない"]
-    B1 = ["ホームページを見てみる", "今は見ない"]
-    B2 = ["ホームページを見てみる", "今は見ない"]
-    B3 = ["ホームページを見てみる", "今は見ない"]
-    B4 = ["ホームページを見てみる", "今は見ない"]
-    C1 = ["ホームページを見てみる", "今は見ない"]
-    C2 = ["ホームページを見てみる", "今は見ない"]
-    C3 = ["ホームページを見てみる", "今は見ない"]
-    C4 = ["ホームページを見てみる", "今は見ない"]
-    C5 = ["ホームページを見てみる", "今は見ない"]
-    D1 = ["ホームページを見てみる", "今は見ない"]
-    D2 = ["ホームページを見てみる", "今は見ない"]
-    D3 = ["ホームページを見てみる", "今は見ない"]
-    D4 = ["ホームページを見てみる", "今は見ない"]
-    E1 = ["ホームページを見てみる", "今は見ない"]
-    E2 = ["ホームページを見てみる", "今は見ない"]
+    A1 = ["豆知識1", "豆知識2", "豆知識3"]
+    A2 = ["豆知識1", "豆知識2", "豆知識3"]
+    A3 = ["豆知識1", "豆知識2", "豆知識3"]
+    A4 = ["豆知識1", "豆知識2", "豆知識3"]
+    A5 = ["豆知識1", "豆知識2", "豆知識3"]
+    A6 = ["豆知識1", "豆知識2", "豆知識3"]
+    A7 = ["豆知識1", "豆知識2", "豆知識3"]
+    B1 = ["豆知識1", "豆知識2", "豆知識3"]
+    B2 = ["豆知識1", "豆知識2", "豆知識3"]
+    B3 = ["豆知識1", "豆知識2", "豆知識3"]
+    B4 = ["豆知識1", "豆知識2", "豆知識3"]
+    C1 = ["豆知識1", "豆知識2", "豆知識3"]
+    C2 = ["豆知識1", "豆知識2", "豆知識3"]
+    C3 = ["豆知識1", "豆知識2", "豆知識3"]
+    C4 = ["豆知識1", "豆知識2", "豆知識3"]
+    C5 = ["豆知識1", "豆知識2", "豆知識3"]
+    D1 = ["豆知識1", "豆知識2", "豆知識3"]
+    D2 = ["豆知識1", "豆知識2", "豆知識3"]
+    D3 = ["豆知識1", "豆知識2", "豆知識3"]
+    D4 = ["豆知識1", "豆知識2", "豆知識3"]
+    E1 = ["豆知識1", "豆知識2", "豆知識3"]
+    E2 = ["豆知識1", "豆知識2", "豆知識3"]
 
     tA1 = ['ありがとうございます！無料相談もありますので、ぜひご検討ください！', 'またお時間があります時にいつでもご覧ください！']
     tA2 = ['ありがとうございます！無料相談もありますので、ぜひご検討ください！', 'またお時間があります時にいつでもご覧ください！']
@@ -134,6 +134,41 @@ class Tree():
 
     layer1_image = list((iA, iB, iC, iD, iE))
 
+
+    #  豆知識
+    tips= 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E8%B1%86%E7%9F%A5%E8%AD%98/%E8%B1%86%E7%9F%A5%E8%AD%98/%E8%B1%86%E7%9F%A5%E8%AD%98example.png'
+
+    iA1 = [tips, tips, tips]
+    iA2 = [tips, tips, tips]
+    iA3 = [tips, tips, tips]
+    iA4 = [tips, tips, tips]
+    iA5 = [tips, tips, tips]
+    iA6 = [tips, tips, tips]
+    iA7 = [tips, tips, tips]
+    iB1 = [tips, tips, tips]
+    iB2 = [tips, tips, tips]
+    iB3 = [tips, tips, tips]
+    iB4 = [tips, tips, tips]
+    iC1 = [tips, tips, tips]
+    iC2 = [tips, tips, tips]
+    iC3 = [tips, tips, tips]
+    iC4 = [tips, tips, tips]
+    iC5 = [tips, tips, tips]
+    iD1 = [tips, tips, tips]
+    iD2 = [tips, tips, tips]
+    iD3 = [tips, tips, tips]
+    iD4 = [tips, tips, tips]
+    iE1 = [tips, tips, tips]
+    iE2 = [tips, tips, tips]
+
+    layer2_image = list((list((iA1, iA2, iA3, iA4, iA5, iA6, iA7)),
+                         list((iB1, iB2, iB3, iB4)),
+                         list((iC1, iC2, iC3, iC4, iC5)),
+                         list((iD1, iD2, iD3, iD4)),
+                         list((iE1, iE2))))
+
+
+
     layers = []
     layers.append(layer0)
     layers.append(layer1)
@@ -142,6 +177,7 @@ class Tree():
     layers_images =  []
     layers_images.append('dummy')
     layers_images.append(layer1_image)
+    layers_images.append(layer2_image)
 
     texts = []
     texts.append('dummy')
