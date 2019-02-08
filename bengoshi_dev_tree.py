@@ -179,10 +179,11 @@ def webhook():
                             image_urls = tree.decide_images(indexes)
                             titles = tree.decide_buttons(indexes)
                             subtitles = titles
-                            buttons = ['なるほど！']
-
                             send_carousel_buttonless(sender_id, titles, image_urls, subtitles)
-                            send_quick_reply(sender_id, '', buttons)
+
+                            text = 'アドバイスは役に立ったかな？'
+                            buttons = ['役に立った！']
+                            send_quick_reply(sender_id, text, buttons)
 
     return "ok", 200
 
