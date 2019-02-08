@@ -32,6 +32,7 @@ lawyer_id = '2316784358340526'
 
 #  ツリークラスを初期化
 tree = Tree()
+#  ガイダンスクラスを初期化
 guidance = Guidance()
 
 def send_get_started():
