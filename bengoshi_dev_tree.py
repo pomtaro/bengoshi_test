@@ -168,6 +168,13 @@ def webhook():
                                 send_message(sender_id, text_second)
                                 text_third = guidance.decide_text_third(indexes)
                                 send_message(sender_id, text_third)
+                            else:
+                                text_first = guidance.decide_text_first(indexes)
+                                send_message(sender_id, text_first)
+                                text_second = guidance.decide_text_second(indexes)
+                                send_message(sender_id, text_second)
+                                text_third = guidance.decide_text_third(indexes)
+                                send_message(sender_id, text_third)
 
 
                         else:
