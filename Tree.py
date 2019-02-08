@@ -1,6 +1,6 @@
 
 
-class Tree():
+class Tree:
     top = ["性格の不一致", "浪費、借金", "DV",
            "浮気、男女問題", "その他"]
     layer0 = list(top)
@@ -31,6 +31,7 @@ class Tree():
     tE = ['無下にできないから大変だよね！\nおすすめのアドバイスを教えてあげるね！', 'その他だね！\nおすすめのアドバイスを教えてあげるね！']
     layer1 = list((A, B, C, D, E))
     text1 = list((tA, tB, tC, tD, tE))
+
 
     A1 = ["豆知識1", "豆知識2", "豆知識3"]
     A2 = ["豆知識1", "豆知識2", "豆知識3"]
@@ -88,6 +89,7 @@ class Tree():
                   list((tC1, tC2, tC3, tC4, tC5)),
                   list((D1, D2, D3, D4)),
                   list((E1, E2))))
+
 
     #  性格の不一致の内訳
     sense_for_money = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4/%E9%87%91%E9%8A%AD%E6%84%9F%E8%A6%9A%E3%83%BB%E7%94%9F%E6%B4%BB%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB/%E9%87%91%E9%8A%AD%E6%84%9F%E8%A6%9A%E3%83%BB%E7%94%9F%E6%B4%BB%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB.png'
@@ -167,16 +169,30 @@ class Tree():
                          list((iD1, iD2, iD3, iD4)),
                          list((iE1, iE2))))
 
+
+    #  弁護士相談メリット
+
+    useful = ['役に立った！']
+    layer3 = list((list((list((useful))))))
+
+    merit1 = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%81%AB%E7%9B%B8%E8%AB%87%E3%81%99%E3%82%8B%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%83%A1%E3%83%AA%E3%83%83%E3%83%881.png'
+    merit2 = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%81%AB%E7%9B%B8%E8%AB%87%E3%81%99%E3%82%8B%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%83%A1%E3%83%AA%E3%83%83%E3%83%882.png'
+    merit3 = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%81%AB%E7%9B%B8%E8%AB%87%E3%81%99%E3%82%8B%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%83%A1%E3%83%AA%E3%83%83%E3%83%883.png'
+
+    layer3_image = [merit1, merit2, merit3]
+
     #  レイヤーにまとめる
     layers = []
     layers.append(layer0)
     layers.append(layer1)
     layers.append(layer2)
+    layers.append(layer3)
 
     layers_images =  []
     layers_images.append('dummy')
     layers_images.append(layer1_image)
     layers_images.append(layer2_image)
+    layers_images.append(layer3_image)
 
     texts = []
     texts.append('dummy')
@@ -195,6 +211,9 @@ class Tree():
                 for layer2_number, text2 in enumerate(self.layer2[layer0_number][layer1_number]):
                     if text2 == message_text:
                         return [layer0_number, layer1_number, layer2_number]
+                    for layer3_number, text3 in enumerate(self.layer3[layer0_number][layer1_number][layer2_number]):
+                        if text3 == message_text:
+                            return [layer0_number, layer1_number, layer2_number, layer3_number]
         return 'no matching'
 
     def decide_buttons(self, indexes):
@@ -230,3 +249,97 @@ class Tree():
             return text
         else:
             return 'None text'
+
+
+
+
+class Guidance:
+    guide0 = ['役に立った！']
+    guide1 = ['ホームページを見てみる！', '今はまだいいかな']
+    guide2 = ['連絡してみる！', '今はまだいいかな']
+
+    layers = []
+    layers.append(guide0)
+    layers.append(guide1)
+    layers.append(guide2)
+
+
+    texts_first_0 = ['お役に立てたようでよかった！\n残念だけど、ぼくがアドバイスできるのはここまでなんだ']
+    texts_second_0 = ['でも安心して！\nもっと詳しいことは弁護士さんが教えてくれるよ！\n弁護士さんに相談するとこんないいことがあるよ！']
+    texts_third_0 = ['あなたの悩みにピッタリなオススメの弁護士さんがいるから、一度ホームページを見てみない？']
+
+    texts_first_1 = []
+    texts_second_1 = []
+    texts_third_1 = []
+
+    texts_second_2 = []
+    texts_first_2 = []
+    texts_third_2 = []
+
+    layers_texts_first = []
+    layers_texts_first.append(texts_first_0)
+    layers_texts_first.append(texts_first_1)
+    layers_texts_first.append(texts_first_2)
+    layers_texts_second = []
+    layers_texts_second.append(texts_second_0)
+    layers_texts_second.append(texts_second_1)
+    layers_texts_second.append(texts_second_2)
+    layers_texts_third = []
+    layers_texts_third.append(texts_third_0)
+    layers_texts_third.append(texts_third_1)
+    layers_texts_third.append(texts_third_2)
+
+    # 弁護士相談メリット画像
+    merit1 = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%81%AB%E7%9B%B8%E8%AB%87%E3%81%99%E3%82%8B%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%83%A1%E3%83%AA%E3%83%83%E3%83%881.png'
+    merit2 = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%81%AB%E7%9B%B8%E8%AB%87%E3%81%99%E3%82%8B%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%83%A1%E3%83%AA%E3%83%83%E3%83%882.png'
+    merit3 = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%81%AB%E7%9B%B8%E8%AB%87%E3%81%99%E3%82%8B%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%83%A1%E3%83%AA%E3%83%83%E3%83%883.png'
+
+    images0 = [[merit1, merit2, merit3]]
+    titles0 = [['メリット1', 'メリット2', 'メリット3']]
+    subtitles0 = [['メリット1', 'メリット2', 'メリット3']]
+
+    layers_images = []
+    layers_images.append(images0)
+    layers_titles = []
+    layers_titles.append(titles0)
+    layers_subtitles = []
+    layers_subtitles.append(subtitles0)
+
+
+
+
+    def search_text(self, message_text):
+        for i, list in enumerate(self.layers):
+            for j, text in enumerate(list):
+                if text == message_text:
+                    return [i, j]
+
+    def decide_text_first(self, indexes):
+        return self.layers_texts_first[indexes[0]][indexes[1]]
+
+
+    def decide_text_second(self, indexes):
+        return self.layers_texts_second[indexes[0]][indexes[1]]
+
+
+    def decide_text_third(self, indexes):
+        return self.layers_texts_third[indexes[0]][indexes[1]]
+
+
+    def decide_images(self, indexes):
+        return self.layers_titles[indexes[0]][indexes[0]], self.layers_images[indexes[0]][indexes[0]], self.layers_subtitles[indexes[0]][indexes[0]]
+
+    def decide_buttons(self, indexes):
+        return self.layers[indexes[0]+1]
+
+
+
+
+
+
+
+
+
+
+
+
