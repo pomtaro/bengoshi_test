@@ -139,6 +139,10 @@ def webhook():
                                 send_quick_reply(sender_id, text_third, buttons)
 
                             elif indexes == [2, 0]:  # 連絡してみる！
+                                text_first = guidance.decide_text_first(indexes)
+                                send_message(sender_id, text_first)
+                                text_second = guidance.decide_text_second(indexes)
+                                send_message(sender_id, text_second)
                                 text_third = guidance.decide_text_third(indexes)
                                 buttons = guidance.decide_buttons(indexes)
                                 send_quick_reply(sender_id, text_third, buttons)
