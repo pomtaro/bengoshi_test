@@ -124,8 +124,6 @@ def webhook():
                         text = 'はじめまして！\nぼくは離婚についてアドバイスする福郎だよ！'
                         send_message(sender_id, text)
 
-
-
                         text = 'まずは気になる項目を下から選んでみてね！'
                         send_message(sender_id, text)
 
