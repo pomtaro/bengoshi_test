@@ -244,6 +244,7 @@ class Guidance:
     layers.append(guide2)
     layers.append(guide3)
     layers.append(guide4)
+    layers.append(guide5)
 
 
     texts_first_0 = ['お役に立てたようでよかった😄\n残念だけど、ぼくがアドバイスできるのはここまでなんだ😔']
