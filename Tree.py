@@ -167,8 +167,7 @@ class Tree():
                          list((iD1, iD2, iD3, iD4)),
                          list((iE1, iE2))))
 
-
-
+    #  レイヤーにまとめる
     layers = []
     layers.append(layer0)
     layers.append(layer1)

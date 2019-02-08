@@ -157,19 +157,30 @@ def webhook():
 
                     else:
                         indexes = tree.search_text(message_text)
-                        text = tree.decide_text(indexes)
-                        send_message(sender_id, text)
+                        if len(indexes) == 1:
+                            text = tree.decide_text(indexes)
+                            send_message(sender_id, text)
 
-                        titles = tree.decide_buttons(indexes)
-                        image_urls = tree.decide_images(indexes)
-                        buttons_titles = []
-                        for title in titles:
-                            button = []
-                            button.append(title)
-                            buttons_titles.append(button)
-                        subtitles = titles
+                            titles = tree.decide_buttons(indexes)
+                            image_urls = tree.decide_images(indexes)
+                            buttons_titles = []
+                            for title in titles:
+                                button = []
+                                button.append(title)
+                                buttons_titles.append(button)
+                            subtitles = titles
 
-                        send_carousel(sender_id, titles, image_urls, subtitles, buttons_titles)
+                            send_carousel(sender_id, titles, image_urls, subtitles, buttons_titles)
+
+                        elif len(indexes) == 2:
+                            text = tree.decide_text(indexes)
+                            send_message(sender_id, text)
+
+                            image_urls = tree.decide_images(indexes)
+                            buttons = ['なるほど！']
+
+                            send_image(sender_id, image_urls)
+                            send_quick_reply(sender_id, '', buttons)
 
     return "ok", 200
 
