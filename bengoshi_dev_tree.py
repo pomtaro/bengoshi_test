@@ -99,6 +99,7 @@ def webhook():
                         # テキストサーチ
                         indexes = guidance.search_text(message_text)
 
+                        # テキストサーチ結果が存在するか
                         if not indexes == None:
                             # ボットテキストfirst
                             text_first = guidance.decide_text_first(indexes)
@@ -107,15 +108,31 @@ def webhook():
                             # ボットテキストsecond
                             text_second = guidance.decide_text_second(indexes)
                             send_message(sender_id, text_second)
+                            if indexes == [0, 0]:  # 役に立った！
+                                # ボタンレスカルーセル送信
+                                titles, image_urls, subtitles = guidance.decide_images(indexes)
+                                send_carousel_buttonless(sender_id, titles, image_urls, subtitles)
 
-                            # ボタンレスカルーセル送信
-                            titles, image_urls, subtitles = guidance.decide_images(indexes)
-                            send_carousel_buttonless(sender_id, titles, image_urls, subtitles)
+                                # クイック返信送信
+                                text_third = guidance.decide_text_third(indexes)
+                                buttons = guidance.decide_buttons(indexes)
+                                send_quick_reply(sender_id, text_third, buttons)
 
-                            # クイック返信送信
-                            text =  guidance.decide_text_third(indexes)
-                            buttons = guidance.decide_buttons(indexes)
-                            send_quick_reply(sender_id, text, buttons)
+                            elif indexes == [1, 0]:  # ホームページを見る！
+                                title = 'さくら総合法律事務所'
+                                subtitle = '武藤洋善 弁護士\n「ご相談内容をよく聞き、懇切、丁寧に」をモットーにしています。'
+                                url_str = 'http://sakurasogo-law.jp/member/mutou.html'
+                                image_url = 'http://sakurasogo-law.jp/member/IMG_1598-2.jpg'
+                                send_url_image(sender_id, title, subtitle, url_str, image_url)
+                                text_third = guidance.decide_text_third(indexes)
+                                buttons = guidance.decide_buttons(indexes)
+                                send_quick_reply(sender_id, text_third, buttons)
+
+                            elif indexes == [2, 0]:  # 連絡してみる！
+                                text_third = guidance.decide_text_third(indexes)
+                                buttons = guidance.decide_buttons(indexes)
+                                send_quick_reply(sender_id, text_third, buttons)
+
                         elif indexes == None:
                             text = 'エラー'
                             send_message(sender_id, text)
