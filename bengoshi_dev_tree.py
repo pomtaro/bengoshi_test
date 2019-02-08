@@ -176,10 +176,11 @@ def webhook():
                             text = tree.decide_text(indexes)
                             send_message(sender_id, text)
 
-                            image_urls = tree.decide_images(indexes)
+                            titles = tree.decide_buttons(indexes)
+                            subtitles = titles
                             buttons = ['なるほど！']
 
-                            send_image(sender_id, image_urls)
+                            send_carousel_buttonless(sender_id, titles, subtitles)
                             send_quick_reply(sender_id, '', buttons)
 
     return "ok", 200
@@ -428,6 +429,54 @@ def send_carousel(recipient_id, titles, image_urls, subtitles, buttons_titles):
     })
 
     requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
+
+def send_carousel_buttonless(recipient_id, titles, image_urls, subtitles):
+    """
+    :param recipient_id: String:
+    :param titles: List: String
+    :param image_urls: List: String
+    :param subtitles: List: String
+    :param buttons_titles: List: List: String
+    :return:
+    """
+
+    params = {
+        "access_token": ACCESS_TOKEN  # os.environ["PAGE_ACCESS_TOKEN"]
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    elements = []
+    carousel_number = len(titles)
+
+    for num in range(carousel_number):
+
+        carousel_dict = {
+            "title": titles[num],
+            "image_url": image_urls[num],
+            "subtitle": subtitles[num]
+        }
+        elements.append(carousel_dict)
+
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": elements
+                }
+            }
+        }
+    })
+
+    requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
 
 
 def send_ok_ng_buttons(recipient_id, sender_id, text):
