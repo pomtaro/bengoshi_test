@@ -241,7 +241,7 @@ class Guidance:
     layers.append(guide2)
 
 
-    texts_first_0 = ['お役に立てたようでよかった\n残念だけど、ぼくがアドバイスできるのはここまでなんだ']
+    texts_first_0 = ['お役に立てたようでよかった😄\n残念だけど、ぼくがアドバイスできるのはここまでなんだ😔']
     texts_second_0 = ['でも安心して👍\nもっと詳しいことは弁護士さんが教えてくれるよ！\n弁護士さんに相談するとこんないいことがあるよ👌']
     texts_third_0 = ['あなたの悩みにピッタリなオススメの弁護士さんがいるから、一度ホームページを見てみない？🤔']
 
@@ -292,6 +292,7 @@ class Guidance:
                     return [i, j]
 
     def decide_text_first(self, indexes):
+        print(indexes)
         return self.layers_texts_first[indexes[0]][indexes[1]]
 
 
