@@ -99,23 +99,26 @@ def webhook():
                         # テキストサーチ
                         indexes = guidance.search_text(message_text)
 
-                        # ボットテキストfirst
-                        text_first = guidance.decide_text_first(indexes)
-                        send_message(sender_id, text_first)
+                        if not indexes == None:
+                            # ボットテキストfirst
+                            text_first = guidance.decide_text_first(indexes)
+                            send_message(sender_id, text_first)
 
-                        # ボットテキストsecond
-                        text_second = guidance.decide_text_second(indexes)
-                        send_message(sender_id, text_second)
+                            # ボットテキストsecond
+                            text_second = guidance.decide_text_second(indexes)
+                            send_message(sender_id, text_second)
 
-                        # ボタンレスカルーセル送信
-                        titles, image_urls, subtitles = guidance.decide_images(indexes)
-                        send_carousel_buttonless(sender_id, titles, image_urls, subtitles)
+                            # ボタンレスカルーセル送信
+                            titles, image_urls, subtitles = guidance.decide_images(indexes)
+                            send_carousel_buttonless(sender_id, titles, image_urls, subtitles)
 
-                        # クイック返信送信
-                        text =  guidance.decide_text_third(indexes)
-                        buttons = guidance.decide_buttons(indexes)
-                        send_quick_reply(sender_id, text, buttons)
-
+                            # クイック返信送信
+                            text =  guidance.decide_text_third(indexes)
+                            buttons = guidance.decide_buttons(indexes)
+                            send_quick_reply(sender_id, text, buttons)
+                        elif indexes == None:
+                            text = 'エラー'
+                            send_message(sender_id, text)
 
                     else:
                         text = "すみません、もう一度選択してください。"
