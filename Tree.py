@@ -291,10 +291,10 @@ class Guidance:
     layers_texts_third.append('dummy')
     layers_texts_third.append(texts_third_5)
     layers_texts_fourth = []
-    layers_texts_third.append('dummy')
-    layers_texts_third.append('dummy')
-    layers_texts_third.append('dummy')
-    layers_texts_third.append(texts_fourth_3)
+    layers_texts_fourth.append('dummy')
+    layers_texts_fourth.append('dummy')
+    layers_texts_fourth.append('dummy')
+    layers_texts_fourth.append(texts_fourth_3)
 
 
     # 弁護士相談メリット画像
@@ -326,10 +326,8 @@ class Guidance:
         print(indexes)
         return self.layers_texts_first[indexes[0]][indexes[1]]
 
-
     def decide_text_second(self, indexes):
         return self.layers_texts_second[indexes[0]][indexes[1]]
-
 
     def decide_text_third(self, indexes):
         return self.layers_texts_third[indexes[0]][indexes[1]]
