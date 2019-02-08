@@ -334,7 +334,7 @@ class Guidance:
     def decide_text_third(self, indexes):
         return self.layers_texts_third[indexes[0]][indexes[1]]
 
-    def decide_text_third(self, indexes):
+    def decide_text_fourth(self, indexes):
         return self.layers_texts_fourth[indexes[0]][indexes[1]]
 
     def decide_images(self, indexes):
