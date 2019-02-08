@@ -165,17 +165,6 @@ class Tree:
                          list((iD1, iD2, iD3, iD4)),
                          list((iE1, iE2))))
 
-    #  弁護士相談メリット
-
-    useful = ['役に立った！']
-    layer3 = list((list((list((useful))))))
-
-    merit1 = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%81%AB%E7%9B%B8%E8%AB%87%E3%81%99%E3%82%8B%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%83%A1%E3%83%AA%E3%83%83%E3%83%881.png'
-    merit2 = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%81%AB%E7%9B%B8%E8%AB%87%E3%81%99%E3%82%8B%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%83%A1%E3%83%AA%E3%83%83%E3%83%882.png'
-    merit3 = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%81%AB%E7%9B%B8%E8%AB%87%E3%81%99%E3%82%8B%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%83%A1%E3%83%AA%E3%83%83%E3%83%883.png'
-
-    layer3_image = [merit1, merit2, merit3]
-
     #  レイヤーにまとめる
     layers = []
     layers.append(layer0)
@@ -187,7 +176,6 @@ class Tree:
     layers_images.append('dummy')
     layers_images.append(layer1_image)
     layers_images.append(layer2_image)
-    layers_images.append(layer3_image)
 
     texts = []
     texts.append('dummy')
@@ -206,9 +194,6 @@ class Tree:
                 for layer2_number, text2 in enumerate(self.layer2[layer0_number][layer1_number]):
                     if text2 == message_text:
                         return [layer0_number, layer1_number, layer2_number]
-#                    for layer3_number, text3 in enumerate(self.layer3[layer0_number][layer1_number][layer2_number]):
-#                        if text3 == message_text:
-#                            return [layer0_number, layer1_number, layer2_number, layer3_number]
         return 'no matching'
 
     def decide_buttons(self, indexes):
