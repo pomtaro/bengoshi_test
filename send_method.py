@@ -1,3 +1,8 @@
+'''
+試してみたが、うまくいかなかった
+なぜ？
+'''
+
 import requests
 
 class Bot():

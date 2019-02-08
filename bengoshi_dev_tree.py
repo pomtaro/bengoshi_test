@@ -46,7 +46,7 @@ def send_get_started():
         "greeting": [
             {
                 "locale": "default",
-                "text": "開発用チャットボット : 修正"
+                "text": "開発用チャットボット"
             }
         ]
     })
@@ -117,6 +117,10 @@ def webhook():
                     send_typing_on(sender_id)
 
                     if message_text == 'スタート' or message_text == 'Get Started':
+
+                        url_startimage = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88/%E3%83%95%E3%82%AF%E3%83%AD%E3%82%A6_test.png'
+                        send_image(sender_id, url_startimage)
+
                         text = 'どのようなお悩みでしょうか？'
                         send_message(sender_id, text)
 
@@ -270,6 +274,54 @@ def send_url_image(recipient_id, title, subtitle, url_str, image_url):
     })
 
     requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
+
+def send_image(recipient_id, image_url):
+    """
+    :param recipient_id: string: bot送信する相手のID
+    :param title: string: タイトル
+    :param subtitle: string: サブタイトル
+    :param url: string: リンク先のURL
+    :param url_image: string: サムネイル画像が格納されているURL
+    :return: POSTリクエスト
+    """
+
+    params = {
+        "access_token": ACCESS_TOKEN  # os.environ["PAGE_ACCESS_TOKEN"]
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "attachment": {
+                "type": "template",
+                "payload": {
+                    "template_type": "generic",
+                    "elements": [
+                        {
+                            #"title": title,
+                            "image_url": image_url,
+                            #"subtitle": subtitle,
+                            #"buttons": [
+                                #{
+                                    #"type": "web_url",
+                                    #"url": url_str,
+                                    #"title": "View Website"
+                                #}
+                            #]
+                        }
+                    ]
+                }
+            }
+        }
+    })
+
+    requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
 
 
 def send_buttons(recipient_id, text, buttons):
