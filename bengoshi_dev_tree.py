@@ -148,6 +148,7 @@ def webhook():
                                 send_quick_reply(sender_id, text_third, buttons)
 
                             elif indexes == [3, 0] or indexes == [4, 1]:  # OK1
+                                indexes = [3, 0]
                                 text_first = guidance.decide_text_first(indexes)
                                 send_message(sender_id, text_first)
                                 info_step = 1
