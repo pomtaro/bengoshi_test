@@ -170,7 +170,6 @@ class Tree:
     layers.append(layer0)
     layers.append(layer1)
     layers.append(layer2)
-    layers.append(layer3)
 
     layers_images =  []
     layers_images.append('dummy')
