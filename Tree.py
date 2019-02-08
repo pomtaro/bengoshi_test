@@ -1,5 +1,4 @@
-
-
+# ポストバックの時に使用するクラス、主に悩み分類の役割
 class Tree:
     top = ["性格の不一致", "浪費、借金", "DV",
            "浮気、男女問題", "その他"]
@@ -31,7 +30,6 @@ class Tree:
     tE = ['無下にできないから大変だよね！\nおすすめのアドバイスを教えてあげるね！', 'その他だね！\nおすすめのアドバイスを教えてあげるね！']
     layer1 = list((A, B, C, D, E))
     text1 = list((tA, tB, tC, tD, tE))
-
 
     A1 = ["豆知識1", "豆知識2", "豆知識3"]
     A2 = ["豆知識1", "豆知識2", "豆知識3"]
@@ -90,7 +88,6 @@ class Tree:
                   list((D1, D2, D3, D4)),
                   list((E1, E2))))
 
-
     #  性格の不一致の内訳
     sense_for_money = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4/%E9%87%91%E9%8A%AD%E6%84%9F%E8%A6%9A%E3%83%BB%E7%94%9F%E6%B4%BB%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB/%E9%87%91%E9%8A%AD%E6%84%9F%E8%A6%9A%E3%83%BB%E7%94%9F%E6%B4%BB%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB.png'
     housework_child_education = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4/%E5%AE%B6%E4%BA%8B%E3%83%BB%E8%82%B2%E5%85%90%E3%83%BB%E6%95%99%E8%82%B2/%E5%AE%B6%E4%BA%8B%E3%83%BB%E8%82%B2%E5%85%90%E3%83%BB%E6%95%99%E8%82%B2.png'
@@ -136,7 +133,6 @@ class Tree:
 
     layer1_image = list((iA, iB, iC, iD, iE))
 
-
     #  豆知識
     tips= 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E8%B1%86%E7%9F%A5%E8%AD%98/%E8%B1%86%E7%9F%A5%E8%AD%98/%E8%B1%86%E7%9F%A5%E8%AD%98example.png'
 
@@ -168,7 +164,6 @@ class Tree:
                          list((iC1, iC2, iC3, iC4, iC5)),
                          list((iD1, iD2, iD3, iD4)),
                          list((iE1, iE2))))
-
 
     #  弁護士相談メリット
 
@@ -236,7 +231,6 @@ class Tree:
         else:
             return 'None Images'
 
-
     def decide_text(self, indexes):
         if len(indexes) == 1:
             text = self.texts[len(indexes)][indexes[0]]
@@ -250,9 +244,8 @@ class Tree:
         else:
             return 'None text'
 
-
-
-
+"""
+# メッセージの時に使用するクラス、主に弁護士案内の役割
 class Guidance:
     guide0 = ['役に立った！']
     guide1 = ['ホームページを見てみる！', '今はまだいいかな']
@@ -332,7 +325,7 @@ class Guidance:
     def decide_buttons(self, indexes):
         return self.layers[indexes[0]+1]
 
-
+"""
 
 
 

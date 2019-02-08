@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 import time
 from Tree import Tree
-from Tree import Guidance
+# from Tree import Guidance
 
 
 import requests
@@ -32,7 +32,7 @@ lawyer_id = '2316784358340526'
 
 #  ツリークラスを初期化
 tree = Tree()
-guidance = Guidance()
+# guidance = Guidance()
 
 def send_get_started():
     params = {
@@ -91,6 +91,7 @@ def webhook():
                     if messaging_event["message"].get("text"):
                         message_text = messaging_event["message"]["text"]  # the message's text
 
+                        """
                         # インジケータ
                         send_typing_on(sender_id)
 
@@ -113,6 +114,7 @@ def webhook():
                         text =  guidance.decide_text_third(indexes)
                         buttons = guidance.decide_buttons(indexes)
                         send_quick_reply(sender_id, text, buttons)
+                        """
 
                     else:
                         text = "すみません、もう一度選択してください。"
