@@ -206,9 +206,9 @@ class Tree:
                 for layer2_number, text2 in enumerate(self.layer2[layer0_number][layer1_number]):
                     if text2 == message_text:
                         return [layer0_number, layer1_number, layer2_number]
-                    for layer3_number, text3 in enumerate(self.layer3[layer0_number][layer1_number][layer2_number]):
-                        if text3 == message_text:
-                            return [layer0_number, layer1_number, layer2_number, layer3_number]
+#                    for layer3_number, text3 in enumerate(self.layer3[layer0_number][layer1_number][layer2_number]):
+#                        if text3 == message_text:
+#                            return [layer0_number, layer1_number, layer2_number, layer3_number]
         return 'no matching'
 
     def decide_buttons(self, indexes):
@@ -244,7 +244,7 @@ class Tree:
         else:
             return 'None text'
 
-"""
+
 # メッセージの時に使用するクラス、主に弁護士案内の役割
 class Guidance:
     guide0 = ['役に立った！']
@@ -325,7 +325,6 @@ class Guidance:
     def decide_buttons(self, indexes):
         return self.layers[indexes[0]+1]
 
-"""
 
 
 
