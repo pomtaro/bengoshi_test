@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 import time
 from Tree import Tree
-from send_method import Bot
+
 
 import requests
 from flask import Flask, request
@@ -32,7 +32,6 @@ lawyer_id = '2316784358340526'
 #  ツリークラスを初期化
 tree = Tree()
 
-"""
 def send_get_started():
     params = {
         "access_token": ACCESS_TOKEN  # os.environ["PAGE_ACCESS_TOKEN"]
@@ -47,17 +46,15 @@ def send_get_started():
         "greeting": [
             {
                 "locale": "default",
-                "text": "開発用チャットボット"
+                "text": "開発用チャットボット : 修正"
             }
         ]
     })
 
     requests.post("https://graph.facebook.com/v2.6/me/messenger_profile", params=params, headers=headers, data=data)
-"""
 
-bot = Bot(ACCESS_TOKEN)
 
-bot.send_get_started()
+send_get_started()
 
 
 @app.route('/', methods=['GET'])
