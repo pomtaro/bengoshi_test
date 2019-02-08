@@ -170,10 +170,7 @@ def webhook():
 
 
                         else:
-                            if indexes == None:
-                                text = 'エラー'
-                                send_message(sender_id, text)
-                            elif info_step == 1:
+                            if info_step == 1:
                                 customer_name = message_text
                                 text_second = guidance.decide_text_second([3, 0])
                                 send_message(sender_id, text_second)
@@ -192,6 +189,9 @@ def webhook():
                                 customer_number = message_text
                                 send_info_validation(sender_id)
                                 info_step = 0
+                            else:
+                                text = 'エラー'
+                                send_message(sender_id, text)
 
 
                     else:
