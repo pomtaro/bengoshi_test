@@ -28,7 +28,7 @@ customer_name_sub = ''
 customer_address = ''
 customer_number = ''
 
-lawyer_id = '2316784358340526'
+lawyer_id = '2230490113648972'  # こじま'2316784358340526'
 
 #  ツリークラスを初期化
 tree = Tree()
@@ -75,6 +75,7 @@ def webhook():
 
     global info_step
     global view_count
+    global customer_name, customer_name_sub, customer_address, customer_number
 
     data = request.get_json()
     print('***** post data *****')
@@ -101,14 +102,15 @@ def webhook():
 
                         # テキストサーチ結果が存在するか
                         if not indexes == None:
-                            # ボットテキストfirst
-                            text_first = guidance.decide_text_first(indexes)
-                            send_message(sender_id, text_first)
-
-                            # ボットテキストsecond
-                            text_second = guidance.decide_text_second(indexes)
-                            send_message(sender_id, text_second)
                             if indexes == [0, 0]:  # 役に立った！
+                                # ボットテキストfirst
+                                text_first = guidance.decide_text_first(indexes)
+                                send_message(sender_id, text_first)
+
+                                # ボットテキストsecond
+                                text_second = guidance.decide_text_second(indexes)
+                                send_message(sender_id, text_second)
+
                                 # ボタンレスカルーセル送信
                                 titles, image_urls, subtitles = guidance.decide_images(indexes)
                                 send_carousel_buttonless(sender_id, titles, image_urls, subtitles)
@@ -119,6 +121,14 @@ def webhook():
                                 send_quick_reply(sender_id, text_third, buttons)
 
                             elif indexes == [1, 0]:  # ホームページを見る！
+                                # ボットテキストfirst
+                                text_first = guidance.decide_text_first(indexes)
+                                send_message(sender_id, text_first)
+
+                                # ボットテキストsecond
+                                text_second = guidance.decide_text_second(indexes)
+                                send_message(sender_id, text_second)
+
                                 title = 'さくら総合法律事務所'
                                 subtitle = '武藤洋善 弁護士\n「ご相談内容をよく聞き、懇切、丁寧に」をモットーにしています。'
                                 url_str = 'http://sakurasogo-law.jp/member/mutou.html'
@@ -133,9 +143,52 @@ def webhook():
                                 buttons = guidance.decide_buttons(indexes)
                                 send_quick_reply(sender_id, text_third, buttons)
 
-                        elif indexes == None:
-                            text = 'エラー'
-                            send_message(sender_id, text)
+                            elif indexes == [3, 0] or indexes == [4, 1]:  # OK1
+                                text_first = guidance.decide_text_first(indexes)
+                                send_message(sender_id, text_first)
+                                info_step = 1
+
+                            elif indexes == [4, 0]: # OK2
+                                text_first = guidance.decide_text_first([indexes])
+                                buttons = guidance.decide_buttons([indexes])
+                                send_quick_reply(sender_id, text_first, buttons)
+                            elif indexes == [5, 0]:  # 送信する
+                                content = 'テストコンテンツ'
+                                send_info_to_lawyer(lawyer_id, customer_name, customer_name_sub, customer_address, customer_number, content)
+                                send_ok_ng_buttons(lawyer_id, sender_id)
+
+                                text_first = guidance.decide_text_first(indexes)
+                                send_message(sender_id, text_first)
+                                text_second = guidance.decide_text_second(indexes)
+                                send_message(sender_id, text_second)
+                                text_third = guidance.decide_text_third(indexes)
+                                send_message(sender_id, text_third)
+
+
+                        else:
+                            if indexes == None:
+                                text = 'エラー'
+                                send_message(sender_id, text)
+                            elif info_step == 1:
+                                customer_name = message_text
+                                text_second = guidance.decide_text_second([3, 0])
+                                send_message(sender_id, text_second)
+                                info_step = 2
+                            elif info_step == 2:
+                                customer_name_sub = message_text
+                                text_third = guidance.decide_text_third([3, 0])
+                                send_message(sender_id, text_third)
+                                info_step = 3
+                            elif info_step == 3:
+                                customer_address = message_text
+                                text_fourth = guidance.decide_text_fourth([3, 0])
+                                send_message(sender_id, text_fourth)
+                                info_step = 4
+                            elif info_step == 4:
+                                customer_number = message_text
+                                send_info_validation(sender_id)
+                                info_step = 0
+
 
                     else:
                         text = "すみません、もう一度選択してください。"
@@ -519,9 +572,13 @@ def send_carousel_buttonless(recipient_id, titles, image_urls, subtitles):
 
     requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
+def send_info_validation(recipient_id):
+    text = 'お疲れ様😄\n入力は以上だよ！\nこの内容で合ってるかな？\nお名前 : {}\nふりがな : {}\nメールアドレス : {}\n電話番号 : {}'.format(customer_name, customer_name_sub, customer_address, customer_number)
+    buttons = ['OK👍', '修正する！']
+    send_quick_reply(recipient_id, text, buttons)
 
 
-def send_ok_ng_buttons(recipient_id, sender_id, text):
+def send_ok_ng_buttons(recipient_id, sender_id):
     """
     :param recipient_id: string: bot送信する相手のID
     :param title: string: タイトル
@@ -558,7 +615,7 @@ def send_ok_ng_buttons(recipient_id, sender_id, text):
                 "type": "template",
                 "payload": {
                     "template_type": "button",
-                    "text": text,
+                    "text": 'OK か NG か選択して下さい。',
                     "buttons": buttons_postback
                 }
             }

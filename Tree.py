@@ -235,12 +235,15 @@ class Guidance:
     guide1 = ['ホームページを見てみる！', '今はまだいいかな']
     guide2 = ['連絡してみる！', '今はまだいいかな']
     guide3 = ['OK👌']
+    guide4 = ['OK👍', '修正する！']
+    guide5 = ['送信する']
 
     layers = []
     layers.append(guide0)
     layers.append(guide1)
     layers.append(guide2)
     layers.append(guide3)
+    layers.append(guide4)
 
 
     texts_first_0 = ['お役に立てたようでよかった😄\n残念だけど、ぼくがアドバイスできるのはここまでなんだ😔']
@@ -255,18 +258,44 @@ class Guidance:
     texts_second_2 = ['名前\nふりがな\nメールアドレス\n電話番号\nを順番に入力してね👍', '他の悩みに関するアドバイスが見たい時は、前のメッセージのボタンを押してみてね👍']
     texts_third_2 = ['入力に進んでいいかな？🤔', '第三者の専門家に話を聞いてもらうのは、すごく大事なことなんだ。\nまたいつでも相談してね👍']
 
+    texts_first_3 = ['名前を入力してね🤔']
+    texts_second_3 = ['ふりがなを入力してね🤔']
+    texts_third_3 = ['メールアドレスを入力してね🤔']
+    texts_fourth_3 = ['電話番号を入力してね🤔']
+
+    texts_first_4 = ['それではオススメの弁護士さんに連絡してみよう！👍']  # 修正するはguide3に戻るため、ここでは要素なし
+
+    texts_first_5 = ['弁護士さんにあなたのお悩みを送ったよ！👌']
+    texts_second_5 = ['もしあなたのお悩みが、弁護士さんの得意分野だった場合は相談に乗ってくれるよ！']
+    texts_third_5 = ['※ 必ずしもご相談に繋がらないことを、予めご了承下さい。']
+
     layers_texts_first = []
     layers_texts_first.append(texts_first_0)
     layers_texts_first.append(texts_first_1)
     layers_texts_first.append(texts_first_2)
+    layers_texts_first.append(texts_first_3)
+    layers_texts_first.append(texts_first_4)
+    layers_texts_first.append(texts_first_5)
     layers_texts_second = []
     layers_texts_second.append(texts_second_0)
     layers_texts_second.append(texts_second_1)
     layers_texts_second.append(texts_second_2)
+    layers_texts_second.append(texts_second_3)
+    layers_texts_second.append('dummy')
+    layers_texts_second.append(texts_second_5)
     layers_texts_third = []
     layers_texts_third.append(texts_third_0)
     layers_texts_third.append(texts_third_1)
     layers_texts_third.append(texts_third_2)
+    layers_texts_third.append(texts_third_3)
+    layers_texts_third.append('dummy')
+    layers_texts_third.append(texts_third_5)
+    layers_texts_fourth = []
+    layers_texts_third.append('dummy')
+    layers_texts_third.append('dummy')
+    layers_texts_third.append('dummy')
+    layers_texts_third.append(texts_fourth_3)
+
 
     # 弁護士相談メリット画像
     merit1 = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%81%AB%E7%9B%B8%E8%AB%87%E3%81%99%E3%82%8B%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88/%E5%BC%81%E8%AD%B7%E5%A3%AB%E3%83%A1%E3%83%AA%E3%83%83%E3%83%881.png'
@@ -305,6 +334,8 @@ class Guidance:
     def decide_text_third(self, indexes):
         return self.layers_texts_third[indexes[0]][indexes[1]]
 
+    def decide_text_third(self, indexes):
+        return self.layers_texts_fourth[indexes[0]][indexes[1]]
 
     def decide_images(self, indexes):
         return self.layers_titles[indexes[0]][indexes[0]], self.layers_images[indexes[0]][indexes[0]], self.layers_subtitles[indexes[0]][indexes[0]]
