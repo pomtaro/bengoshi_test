@@ -9,6 +9,7 @@ import json
 from datetime import datetime
 import time
 from Tree import Tree
+from send_method import Bot
 
 import requests
 from flask import Flask, request
@@ -28,14 +29,10 @@ customer_number = ''
 
 lawyer_id = '2316784358340526'
 
-"""
-chatbot-dev : 'EAAFcwgncLV0BAPduIt9AjwsONBl2MWTlAWX7yVZCSLn28ew5qlDIaOoEZBdkDOYC4ZAwqYvEPdfzARRTRT2TBNgQfwSi1vZAeytZBoug3PSd8uykY5cr6BVrm5GKNY0ZBo4ORRZCsJDaaHJiMOFjMm9J2JcCZCdFPmwF61YtZA1ZCnlAZDZD'
-弁護士bot : 'EAAHZBLbwxSdQBAGPjgg3IdGTl76jRSZAfHjjjhuq1B3vTHsfczRwMnHoZBEZADRa7Ui4fYNuVMO5aZCza4K582yQwo0gmV8sojNplVW0PGokf06QavX56sqpfC2PemspkASAo8sTPZC85vt12UpQvg0HxExAmffeKf27cvKGfrTwZDZD'
-"""
-
+#  ツリークラスを初期化
 tree = Tree()
 
-
+"""
 def send_get_started():
     params = {
         "access_token": ACCESS_TOKEN  # os.environ["PAGE_ACCESS_TOKEN"]
@@ -56,15 +53,15 @@ def send_get_started():
     })
 
     requests.post("https://graph.facebook.com/v2.6/me/messenger_profile", params=params, headers=headers, data=data)
+"""
 
+bot = Bot(ACCESS_TOKEN)
 
-send_get_started()
+bot.send_get_started()
 
 
 @app.route('/', methods=['GET'])
 def verify():
-    # when the endpoint is registered as a webhook, it must echo back
-    # the 'hub.challenge' value it receives in the query arguments
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
         if not request.args.get("hub.verify_token") == VERIFY_TOKEN:  # os.environ["VERIFY_TOKEN"]:
             return "Verification token mismatch", 403
@@ -75,7 +72,6 @@ def verify():
 
 @app.route('/', methods=['POST'])
 def webhook():
-    # endpoint for processing incoming messaging events
 
     global info_step
     global view_count
@@ -83,7 +79,6 @@ def webhook():
     data = request.get_json()
     print('***** post data *****')
     print(data)
-    #    log(data)  # you may not want to log every incoming message in production, but it's good for testing
 
     if data["object"] == "page":
 
@@ -91,13 +86,8 @@ def webhook():
             for messaging_event in entry["messaging"]:
 
                 if messaging_event.get("message"):  # someone sent us a message
-                    """
-                        ユーザからメッセージが送られた時に実行される
-                    """
 
                     sender_id = messaging_event["sender"]["id"]
-                    #                    recipient_id = messaging_event["recipient"]["id"]
-                    #                    message_text = ""
 
                     if messaging_event["message"].get("text"):
                         message_text = messaging_event["message"]["text"]  # the message's text
@@ -136,44 +126,15 @@ def webhook():
                         titles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
 
                         mismatch_of_personality = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B4/%E6%80%A7%E6%A0%BC%E3%81%AE%E4%B8%8D%E4%B8%80%E8%87%B42.png'
-                        waste_debt = 'https://github.com/pomtaro/bengoshi_test/blob/master/pic_bot/' \
-                                     '%E6%B5%AA%E8%B2%BB%E3%83%BB%E5%80%9F%E9%87%91/' \
-                                     '%E6%B5%AA%E8%B2%BB%E3%83%BB%E5%80%9F%E9%87%91.png?raw=true'
+                        waste_debt = 'https://github.com/pomtaro/bengoshi_test/blob/master/pic_bot/%E6%B5%AA%E8%B2%BB%E3%83%BB%E5%80%9F%E9%87%91/%E6%B5%AA%E8%B2%BB%E3%83%BB%E5%80%9F%E9%87%91.png?raw=true'
                         dv = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/DV/DV2.png'
-                        unfaithful_sexualproblem = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/' \
-                                                   'pic_bot/%E6%B5%AE%E6%B0%97%E3%83%BB%E7%94%B7%E5%A5%B3%E5%95%8F%E9%A1%8C/' \
-                                                   '%E6%B5%AE%E6%B0%97%E3%83%BB%E7%94%B7%E5%A5%B3%E5%95%8F%E9%A1%8C.png'
+                        unfaithful_sexualproblem = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E6%B5%AE%E6%B0%97%E3%83%BB%E7%94%B7%E5%A5%B3%E5%95%8F%E9%A1%8C/%E6%B5%AE%E6%B0%97%E3%83%BB%E7%94%B7%E5%A5%B3%E5%95%8F%E9%A1%8C.png'
                         other = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E3%81%9D%E3%81%AE%E4%BB%96/%E3%81%9D%E3%81%AE%E4%BB%96.png'
-
-
 
                         image_urls = [mismatch_of_personality, waste_debt, dv, unfaithful_sexualproblem, other]
                         subtitles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
                         buttons_titles = [["性格の不一致"], ["浪費、借金"], ["DV"], ["浮気、男女問題"], ["その他"]]
                         send_carousel(sender_id, titles, image_urls, subtitles, buttons_titles)
-
-                    elif message_text == 'A':
-                        text = 'A is selected'
-                        send_message(sender_id, text)
-
-                    elif message_text == 'B':
-                        text = 'B is selected'
-                        send_message(sender_id, text)
-
-                    elif message_text == 'C':
-                        text = 'C is selected'
-                        send_message(sender_id, text)
-
-                    elif message_text == 'D':
-                        text = 'D is selected'
-                        send_message(sender_id, text)
-
-                    elif message_text == 'E':
-                        text = 'E is selected'
-                        send_message(sender_id, text)
-                    elif message_text == 'F':
-                        text = 'F is selected'
-                        send_message(sender_id, text)
 
                     elif message_text == "NG":
                         text = '大変申し訳ございません。今回はお客様のご相談にお応えできる弁護士が見つかりませんでした。'
@@ -206,13 +167,10 @@ def webhook():
 
                         send_carousel(sender_id, titles, image_urls, subtitles, buttons_titles)
 
-
-
     return "ok", 200
 
 
 def send_message(recipient_id, message_text):
-    #    log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
 
     params = {
         "access_token": ACCESS_TOKEN  # os.environ["PAGE_ACCESS_TOKEN"]
@@ -229,16 +187,7 @@ def send_message(recipient_id, message_text):
         }
     })
 
-    """
-    ここでrequests.postを実行した時点で指定urlにリクエストを送信し、
-    botがメッセージを送信している
-    """
     requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
-
-
-#    if r.status_code != 200:
-#        log(r.status_code)
-#        log(r.text)
 
 
 def send_quick_reply(recipient_id, text, buttons):
