@@ -298,23 +298,10 @@ def send_image(recipient_id, image_url):
         },
         "message": {
             "attachment": {
-                "type": "template",
+                "type": "image",
                 "payload": {
-                    "template_type": "generic",
-                    "elements": [
-                        {
-                            #"title": title,
-                            "image_url": image_url,
-                            #"subtitle": subtitle,
-                            #"buttons": [
-                                #{
-                                    #"type": "web_url",
-                                    #"url": url_str,
-                                    #"title": "View Website"
-                                #}
-                            #]
-                        }
-                    ]
+                    "url": image_url,
+                    "is_reusable": 'true'
                 }
             }
         }
