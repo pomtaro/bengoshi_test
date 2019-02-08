@@ -121,7 +121,12 @@ def webhook():
                         url_startimage = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88/%E3%83%95%E3%82%AF%E3%83%AD%E3%82%A6_test.png'
                         send_image(sender_id, url_startimage)
 
-                        text = 'どのようなお悩みでしょうか？'
+                        text = 'はじめまして！\nぼくは離婚についてアドバイスする福郎だよ！'
+                        send_message(sender_id, text)
+
+
+
+                        text = 'まずは気になる項目を下から選んでみてね！'
                         send_message(sender_id, text)
 
                         titles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
@@ -278,6 +283,7 @@ def send_url_image(recipient_id, title, subtitle, url_str, image_url):
 
 def send_image(recipient_id, image_url):
     """
+    画像を送るだけ
     :param recipient_id: string: bot送信する相手のID
     :param title: string: タイトル
     :param subtitle: string: サブタイトル
