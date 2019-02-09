@@ -180,6 +180,8 @@ def webhook():
                                 send_message(sender_id, text_first)
                                 text_second = guidance.decide_text_second(indexes)
                                 send_message(sender_id, text_second)
+                                url = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E8%A3%9C%E8%B6%B3%E8%AA%AC%E6%98%8E%E7%94%A8/%E3%83%9C%E3%82%BF%E3%83%B3%E8%AA%AC%E6%98%8E.png'
+                                send_image(sender_id, url)
                                 text_third = guidance.decide_text_third(indexes)
                                 send_message(sender_id, text_third)
 
