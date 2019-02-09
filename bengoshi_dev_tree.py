@@ -139,7 +139,7 @@ def webhook():
                                 title = 'さくら総合法律事務所'
                                 subtitle = '武藤洋善 弁護士\n「ご相談内容をよく聞き、懇切、丁寧に」をモットーにしています。'
                                 url_str = 'http://sakurasogo-law.jp/member/mutou.html'
-                                image_url = 'http://sakurasogo-law.jp/member/IMG_1598-2.jpg'
+                                image_url = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E5%BC%81%E8%AD%B7%E5%A3%AB%E5%86%99%E7%9C%9F/%E6%AD%A6%E8%97%A4%E3%81%95%E3%82%93%E5%86%99%E7%9C%9F.png'
                                 send_url_image(sender_id, title, subtitle, url_str, image_url)
                                 text_third = guidance.decide_text_third(indexes)
                                 buttons = guidance.decide_buttons(indexes)
