@@ -1,7 +1,3 @@
-"""
-    基本形完成
-    動作確認済み
-"""
 
 import os
 import sys
