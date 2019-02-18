@@ -168,7 +168,7 @@ class Flow:
 
         requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
-    def send_carousel_buttonless(self, recipient_id, titles, image_urls, subtitles, access_token):
+    def send_carousel_buttonless(self, recipient_id, titles, subtitles, image_urls, access_token):
 
         params = {
             "access_token": access_token
