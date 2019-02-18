@@ -15,7 +15,10 @@ class Flow:
                 "method": "send_quick_reply",
                 "text": "はじめまして😄\nぼくは借金セルフチェックアシスタントの福郎だよ！",
                 "buttons": ["よろしく！"]
-            },
+            }
+        ],
+
+        "よろしく！": [
             {
                 "method": "send_message",
                 "text": "実は日本で借金に悩んでいる人は30％ぐらいいるんだ🤔"
