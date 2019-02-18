@@ -107,6 +107,10 @@ def webhook():
                         # インジケータ
                         send_typing_on(sender_id)
 
+                        flow.execute_method(sender_id, message_text, ACCESS_TOKEN)
+
+
+                        """
                         # テキストサーチ
                         indexes = guidance.search_text(message_text)
 
@@ -212,7 +216,7 @@ def webhook():
                             else:
                                 text = 'エラー'
                                 send_message(sender_id, text)
-
+                        """
 
                     else:
                         text = "すみません、もう一度選択してください。"
