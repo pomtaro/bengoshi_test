@@ -523,9 +523,9 @@ class Flow:
             },
             {
                 "method": "send_image",
-                "image_url": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
-                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer9/"
-                             "%E3%82%A2%E3%83%B3%E3%82%B1%E3%83%BC%E3%83%88.png"
+                "image_url": "https://github.com/pomtaro/bengoshi_test/blob/master/pic_bot/"
+                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/"
+                             "layer9/%E3%82%A2%E3%83%B3%E3%82%B1%E3%83%BC%E3%83%88.png?raw=true"
             },
             {
                 "method": "send_quick_reply",
