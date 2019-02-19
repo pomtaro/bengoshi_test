@@ -537,20 +537,35 @@ class Flow:
         "とても良かったよ": [
             {
                 "method": "record_impression"
+            },
+            {
+                "method": "send_message",
+                "text": "セルフチェックは以上で終わり！\nあなたがうまく借金を整理できることを願ってるよ！👍"
             }
         ],
 
         "イマイチだね": [
             {
                 "method": "record_impression"
+            },
+            {
+                "method": "send_message",
+                "text": "セルフチェックは以上で終わり！\nあなたがうまく借金を整理できることを願ってるよ！👍"
             }
+
         ],
 
         "二度と使わない！": [
             {
                 "method": "record_impression"
+            },
+            {
+                "method": "send_message",
+                "text": "セルフチェックは以上で終わり！\nあなたがうまく借金を整理できることを願ってるよ！👍"
             }
+
         ]
+
     }
 
     def message_is(self, message_text):  # メッセージが辞書に存在するか判定
