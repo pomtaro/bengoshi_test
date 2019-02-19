@@ -907,7 +907,7 @@ class Flow:
                                                            ["自己破産を詳しく見る"]]
         elif consolidation_group == "individual rehabilitation":
             self.flow_dict["確認する"][2]["titles"] = ["個人再生",
-                                                   "任意整理"
+                                                   "任意整理",
                                                    "自己破産"]
             self.flow_dict["確認する"][2]["subtitles"] = ["個人再生は財産を残しながら借金を大きく減らすことができるんだ。",
                                                       "任意整理は最小限のリスクで借金の負担を減らす方法だよ。",
