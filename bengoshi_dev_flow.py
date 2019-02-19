@@ -233,13 +233,12 @@ def webhook():
 
                     send_typing_on(sender_id)
 
-                    if message_text == 'スタート' or message_text == 'Get Started':
-                        flow.execute_method(sender_id, message_text, ACCESS_TOKEN)
+                    flow.execute_method(sender_id, message_text, ACCESS_TOKEN)
 
 
 
 
-                        """
+                    """
                         url_startimage = 'https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88/%E3%83%95%E3%82%AF%E3%83%AD%E3%82%A6_test.png'
                         send_image(sender_id, url_startimage)
 
@@ -261,13 +260,13 @@ def webhook():
                         subtitles = ["性格の不一致", "浪費、借金", "DV", "浮気、男女問題", "その他"]
                         buttons_titles = [["性格の不一致"], ["浪費、借金"], ["DV"], ["浮気、男女問題"], ["その他"]]
                         send_carousel(sender_id, titles, image_urls, subtitles, buttons_titles)
-                        """
+                    """
 
 
 
 
 
-                    elif message_text == "NG":
+                    if message_text == "NG":
                         text = '大変申し訳ございません。今回はお客様のご相談にお応えできる弁護士が見つかりませんでした。'
                         send_message(return_id, text)
                         text = '法的トラブルの総合解決所である、「法テラス」へご相談されることをご検討ください。'
