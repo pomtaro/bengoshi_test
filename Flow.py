@@ -361,8 +361,40 @@ class Flow:
                 "method": "decide_consolidation_image"
             },
             {
+                "method": "send_message",
+                "text": "チェック結果だよ🤔"
+            },
+            {
                 "method": "send_image",
-                "image_url": "Hello"
+                "image_url": ""  # decide_consolidation_image内でurlを定義している
+            },
+            {
+                "method": "send_message",
+                "text": ""  # decide_consolidation_comment内でtextを定義している
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "借金を整理する方法はいくつかあって、借金の状況に応じてちゃんと選択することがとても重要なんだ🤔"
+                        "どんな整理の方法があるか、確認してみよう！",
+                "buttons": ["確認する"]
+            }
+        ],
+
+        "確認する": [
+            {
+                "method": "decide_consolidation_recommendation"
+            },
+            {
+                "method": "send_message",
+                "text": "あなたにオススメの整理方法をぼくなりに考えてみたよ👌\n"
+                        "他の整理方法も見てみてね"
+            },
+            {
+                "method": "send_carousel",
+                "titles": [],  # decide_consolidation_recommendation内で定義
+                "subtitles": [],  # decide_consolidation_recommendation内で定義
+                "image_urls": [],  # decide_consolidation_recommendation内で定義
+                "buttons_titles": [[]]  # decide_consolidation_recommendation内で定義
             }
         ]
 
@@ -406,6 +438,12 @@ class Flow:
                 elif method == "send_image":
                     image_url = self.flow_dict[message_text][item_number]["image_url"]
                     self.send_image(recipient_id, image_url, access_token)
+                elif method == "send_carousel":
+                    titles = self.flow_dict[message_text][item_number]["titles"]
+                    subtitles = self.flow_dict[message_text][item_number]["subtitles"]
+                    image_urls = self.flow_dict[message_text][item_number]["image_urls"]
+                    buttons_titles = self.flow_dict[message_text][item_number]["buttons_titles"]
+                    self.send_carousel(recipient_id, titles, subtitles, image_urls, buttons_titles, access_token)
                 elif method == "send_carousel_buttonless":
                     titles = self.flow_dict[message_text][item_number]["titles"]
                     subtitles = self.flow_dict[message_text][item_number]["subtitles"]
@@ -413,12 +451,14 @@ class Flow:
                     self.send_carousel_buttonless(recipient_id, titles, subtitles, image_urls, access_token)
                 elif method == "record_debt_companies":
                     self.record_debt_companies(message_text)
-                elif method == "record_debt_prices":
+                elif method == "record_debt_pices":
                     self.record_debt_prices(message_text)
                 elif method == "record_pay_per_month":
                     self.record_pay_per_month(message_text)
                 elif method == "decide_consolidation_image":
                     self.decide_consolidation_image()
+                elif method == "decide_consolidation_recommendation":
+                    self.decide_consolidation_recommendation()
 
 
 
@@ -501,6 +541,55 @@ class Flow:
 
         requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
+    def send_carousel(self, recipient_id, titles,  subtitles, image_urls, buttons_titles, access_token):
+
+        params = {
+            "access_token": access_token
+        }
+        headers = {
+            "Content-Type": "application/json"
+        }
+
+        elements = []
+        carousel_number = len(titles)
+
+        for num in range(carousel_number):
+
+            buttons = []
+
+            for button_title in buttons_titles[num]:
+                button_dict = {
+                    "type": "postback",
+                    "title": button_title,
+                    "payload": "payload : " + button_title
+                }
+                buttons.append(button_dict)
+
+            carousel_dict = {
+                "title": titles[num],
+                "image_url": image_urls[num],
+                "subtitle": subtitles[num],
+                "buttons": buttons
+            }
+            elements.append(carousel_dict)
+
+        data = json.dumps({
+            "recipient": {
+                "id": recipient_id
+            },
+            "message": {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": elements
+                    }
+                }
+            }
+        })
+
+        requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
     def send_carousel_buttonless(self, recipient_id, titles, subtitles, image_urls, access_token):
 
         params = {
@@ -540,15 +629,12 @@ class Flow:
 
     def record_debt_companies(self, message_text):
         self.debt_companies = message_text
-        print(self.debt_companies)
 
     def record_debt_prices(self, message_text):
         self.debt_prices = message_text
-        print(self.debt_prices)
 
     def record_pay_per_month(self, message_text):
         self.pay_per_month = message_text
-        print(self.pay_per_month)
 
     def decide_consolidation_group(self, debt_prices, pay_per_month):
         if debt_prices == "0~100万":
@@ -566,9 +652,9 @@ class Flow:
         elif debt_prices == "500~1000万":
             if pay_per_month == "0~1万":
                 return "personal bankruptcy"
-            elif pay_per_month == "1~5万":
+            elif pay_per_month == "1~5万" or pay_per_month == "5~10万":
                 return "individual rehabilitation"
-            elif pay_per_month == "5~10万" or pay_per_month == "10万以上":
+            elif pay_per_month == "10万以上":
                 return "voluntary liquidation"
         elif debt_prices == "1000~2000万":
             if pay_per_month == "0~1万" or pay_per_month == "1~5万":
@@ -597,11 +683,98 @@ class Flow:
         }
 
         if consolidation_group == "voluntary liquidation":
-            self.flow_dict["見てみる"][1]["image_url"] = urls_dict["voluntary liquidation"]
+            self.flow_dict["見てみる"][2]["image_url"] = urls_dict["voluntary liquidation"]
         elif consolidation_group == "individual rehabilitation":
-            self.flow_dict["見てみる"][1]["image_url"] = urls_dict["individual rehabilitation"]
+            self.flow_dict["見てみる"][2]["image_url"] = urls_dict["individual rehabilitation"]
         elif consolidation_group == "personal bankruptcy":
-            self.flow_dict["見てみる"][1]["image_url"] = urls_dict["personal bankruptcy"]
+            self.flow_dict["見てみる"][2]["image_url"] = urls_dict["personal bankruptcy"]
 
-        print(self.flow_dict["見てみる"][1]["image_url"])
+    def decide_consolidation_comment(self):
+        consolidation_group = self.decide_consolidation_group(self.debt_prices, self.pay_per_month)
+
+        comments_dict = {
+            "voluntary liquidation": "あなたの深刻度は60％！\n"
+                                     "早めに借金を整理していけば、返済の負担を大きく減らすことができるよ👌",
+            "individual rehabilitation": "あなたの深刻度は80％！\n"
+                                         "でも安心して、財産を保持したまま大きく借金を減額する方法だってあるんだ👌",
+            "personal bankruptcy": "あなたの深刻度は100％！\n"
+                                   "今すぐにでも行動を起こさないとまずい！でも少し待って、まずは借金の整理について見ていこう👌"
+        }
+
+        if consolidation_group == "voluntary liquidation":
+            self.flow_dict["見てみる"][3]["text"] = comments_dict["voluntary liquidation"]
+        elif consolidation_group == "individual rehabilitation":
+            self.flow_dict["見てみる"][3]["text"] = comments_dict["individual rehabilitation"]
+        elif consolidation_group == "personal bankruptcy":
+            self.flow_dict["見てみる"][3]["text"] = comments_dict["personal bankruptcy"]
+
+    def decide_consolidation_recommendation(self):
+        consolidation_group = self.decide_consolidation_group(self.debt_prices, self.pay_per_month)
+
+        urls_dict = {
+            "voluntary liquidation_recommended": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/"
+                                                 "pic_bot/%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%"
+                                                 "E5%83%8F/layer7/%E4%BB%BB%E6%84%8F%E6%95%B4%E7%90%86_%E3%82%AA%"
+                                                 "E3%82%B9%E3%82%B9%E3%83%A1.png",
+            "individual rehabilitation_recommended": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/"
+                                                     "pic_bot/%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%"
+                                                     "E5%83%8F/layer7/%E5%80%8B%E4%BA%BA%E5%86%8D_%E3%82%AA%E3%82%B9%"
+                                                     "E3%82%B9%E3%83%A1.png",
+            "personal bankruptcy_recommended": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                                               "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer7/"
+                                               "%E8%87%AA%E5%B7%B1%E7%A0%B4%E7%94%A3_%E3%82%AA%E3%82%B9%E3%82%B9%E3%83%"
+                                               "A1.png",
+            "voluntary liquidation_other": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                                           "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer7/"
+                                           "%E4%BB%BB%E6%84%8F%E6%95%B4%E7%90%86_%E3%81%9D%E3%81%AE%E4%BB%96.png",
+            "individual rehabilitation_other": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                                               "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer7/"
+                                               "%E5%80%8B%E4%BA%BA%E5%86%8D%E7%94%9F_%E3%81%9D%E3%81%AE%E4%BB%96.png",
+            "personal bankruptcy_other": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                                         "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer7/"
+                                         "%E8%87%AA%E5%B7%B1%E7%A0%B4%E7%94%A3_%E3%81%9D%E3%81%AE%E4%BB%96.png"
+        }
+
+        if consolidation_group == "voluntary liquidation":
+            self.flow_dict["確認する"][2]["titles"] = ["任意整理",
+                                                   "個人再生",
+                                                   "自己破産"]
+            self.flow_dict["確認する"][2]["subtitles"] = ["任意整理は最小限のリスクで借金の負担を減らす方法だよ。",
+                                                      "個人再生は財産を残しながら借金を大きく減らすことができるんだ。",
+                                                      "自己破産は借金をすべて無くすことができる！"]
+            self.flow_dict["確認する"][2]["image_urls"] = [urls_dict["voluntary liquidation_recommended"],
+                                                       urls_dict["individual rehabilitation_other"],
+                                                       urls_dict["personal bankruptcy_other"]]
+            self.flow_dict["確認する"][2]["buttons_titles"] = [["任意整理を詳しく見る"],
+                                                           ["個人再生を詳しく見る"],
+                                                           ["自己破産を詳しく見る"]]
+        elif consolidation_group == "individual rehabilitation":
+            self.flow_dict["確認する"][2]["titles"] = ["個人再生",
+                                                   "任意整理"
+                                                   "自己破産"]
+            self.flow_dict["確認する"][2]["subtitles"] = ["個人再生は財産を残しながら借金を大きく減らすことができるんだ。",
+                                                      "任意整理は最小限のリスクで借金の負担を減らす方法だよ。",
+                                                      "自己破産は借金をすべて無くすことができる！"]
+            self.flow_dict["確認する"][2]["image_urls"] = [urls_dict["individual rehabilitation_recommended"],
+                                                       urls_dict["voluntary liquidation_other"],
+                                                       urls_dict["personal bankruptcy_other"]]
+            self.flow_dict["確認する"][2]["buttons_titles"] = [["個人再生を詳しく見る"],
+                                                            ["任意整理を詳しく見る"],
+                                                           ["自己破産を詳しく見る"]]
+        elif consolidation_group == "personal bankruptcy":
+            self.flow_dict["確認する"][2]["titles"] = ["自己破産",
+                                                   "任意整理",
+                                                   "個人再生"]
+            self.flow_dict["確認する"][2]["subtitles"] = ["自己破産は借金をすべて無くすことができる！",
+                                                      "任意整理は最小限のリスクで借金の負担を減らす方法だよ。",
+                                                      "個人再生は財産を残しながら借金を大きく減らすことができるんだ。"]
+            self.flow_dict["確認する"][2]["image_urls"] = [urls_dict["personal bankruptcy_recommended"],
+                                                       urls_dict["voluntary liquidation_other"],
+                                                       urls_dict["personal bankruptcy_other"]]
+            self.flow_dict["確認する"][2]["buttons_titles"] = [["自己破産を詳しく見る"],
+                                                           ["個人再生を詳しく見る"],
+                                                           ["任意整理を詳しく見る"]]
+
+
+
 
