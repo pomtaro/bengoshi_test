@@ -413,7 +413,7 @@ class Flow:
                     self.send_carousel_buttonless(recipient_id, titles, subtitles, image_urls, access_token)
                 elif method == "record_debt_companies":
                     self.record_debt_companies(message_text)
-                elif method == "record_debt_ptices":
+                elif method == "record_debt_prices":
                     self.record_debt_prices(message_text)
                 elif method == "record_pay_per_month":
                     self.record_pay_per_month(message_text)
