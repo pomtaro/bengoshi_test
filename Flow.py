@@ -377,7 +377,7 @@ class Flow:
             },
             {
                 "method": "send_quick_reply",
-                "text": "借金を整理する方法はいくつかあって、借金の状況に応じてちゃんと選択することがとても重要なんだ🤔"
+                "text": "借金を整理する方法はいくつかあって、借金の状況に応じてちゃんと選択することがとても重要なんだ🤔\n"
                         "どんな整理の方法があるか、確認してみよう！",
                 "buttons": ["確認する"]
             }
@@ -454,7 +454,7 @@ class Flow:
                     self.send_carousel_buttonless(recipient_id, titles, subtitles, image_urls, access_token)
                 elif method == "record_debt_companies":
                     self.record_debt_companies(message_text)
-                elif method == "record_debt_pices":
+                elif method == "record_debt_prices":
                     self.record_debt_prices(message_text)
                 elif method == "record_pay_per_month":
                     self.record_pay_per_month(message_text)
