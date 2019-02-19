@@ -540,12 +540,15 @@ class Flow:
 
     def record_debt_companies(self, message_text):
         self.debt_companies = message_text
+        print(self.debt_companies)
 
     def record_debt_prices(self, message_text):
         self.debt_prices = message_text
+        print(self.debt_prices)
 
     def record_pay_per_month(self, message_text):
         self.pay_per_month = message_text
+        print(self.pay_per_month)
 
     def decide_consolidation_group(self, debt_prices, pay_per_month):
         if debt_prices == "0~100万":
