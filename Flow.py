@@ -4,6 +4,10 @@ import json
 
 class Flow:
 
+    debt_companies = ""
+    debt_prices = ""
+    pay_per_month = ""
+
     flow_dict = {
         "スタート": [
             {
@@ -89,7 +93,7 @@ class Flow:
                 "method": "send_carousel_buttonless",
                 "titles": [
                     "取り立てが精神的苦痛を引き起こす。",
-                    "常に借金を意識させる。",
+                    "常に借金を意識させられている。",
                     "取り立てと精神的苦痛はいつもセットだ！"
                 ],
                 "subtitles": [
@@ -164,7 +168,7 @@ class Flow:
                              "layer3_question.png"
             },
             {
-                "method": "send_quick_reply",
+                "method": "send_quick_reply_tmp",
                 "text": "下から選んでね。",
                 "buttons": ["1社", "2社", "3社以上"]
             }
@@ -192,26 +196,37 @@ class Flow:
             return False
 
     def execute_method(self, recipient_id, message_text, access_token):
-        item_numbers = self.read_item_numbers(message_text)
+        if self.messgage_is(message_text):
 
-        for item_number in range(item_numbers):
-            method = self.read_method(message_text, item_number)
+            item_numbers = self.read_item_numbers(message_text)
 
-            if method == "send_message":
-                text = self.flow_dict[message_text][item_number]["text"]
-                self.send_message(recipient_id, text, access_token)
-            elif method == "send_quick_reply":
-                text = self.flow_dict[message_text][item_number]["text"]
-                buttons = self.flow_dict[message_text][item_number]["buttons"]
-                self.send_quick_reply(recipient_id, text, buttons, access_token)
-            elif method == "send_image":
-                image_url = self.flow_dict[message_text][item_number]["image_url"]
-                self.send_image(recipient_id, image_url, access_token)
-            elif method == "send_carousel_buttonless":
-                titles = self.flow_dict[message_text][item_number]["titles"]
-                subtitles = self.flow_dict[message_text][item_number]["subtitles"]
-                image_urls = self.flow_dict[message_text][item_number]["image_urls"]
-                self.send_carousel_buttonless(recipient_id, titles, subtitles, image_urls, access_token)
+            for item_number in range(item_numbers):
+                method = self.read_method(message_text, item_number)
+
+                if method == "send_message":
+                    text = self.flow_dict[message_text][item_number]["text"]
+                    self.send_message(recipient_id, text, access_token)
+                elif method == "send_quick_reply":
+                    text = self.flow_dict[message_text][item_number]["text"]
+                    buttons = self.flow_dict[message_text][item_number]["buttons"]
+                    self.send_quick_reply(recipient_id, text, buttons, access_token)
+                elif method == "send_image":
+                    image_url = self.flow_dict[message_text][item_number]["image_url"]
+                    self.send_image(recipient_id, image_url, access_token)
+                elif method == "send_carousel_buttonless":
+                    titles = self.flow_dict[message_text][item_number]["titles"]
+                    subtitles = self.flow_dict[message_text][item_number]["subtitles"]
+                    image_urls = self.flow_dict[message_text][item_number]["image_urls"]
+                    self.send_carousel_buttonless(recipient_id, titles, subtitles, image_urls, access_token)
+                elif method == "send_quick_reply_tmp":
+                    text = self.flow_dict[message_text][item_number]["text"]
+                    buttons = self.flow_dict[message_text][item_number]["buttons"]
+                    self.send_quick_reply_tmp(recipient_id, text, buttons, access_token)
+
+
+        else:
+            text = "エラー"
+            self.send_message(recipient_id, text, access_token)
 
     def send_message(self, recipient_id, text, access_token):
 
@@ -262,6 +277,42 @@ class Flow:
         })
 
         requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
+    def send_quick_reply_tmp(self, recipient_id, text, buttons, access_token):
+
+        params = {
+            "access_token": access_token
+        }
+        headers = {
+            "Content-Type": "application/json"
+        }
+
+        quick_replies = []
+
+        for button in buttons:
+            quick_dict = {
+                "content_type": "text",
+                "title": button,
+                "payload": "payload: {}".format(button)
+            }
+            quick_replies.append(quick_dict)
+
+        data = json.dumps({
+            "recipient": {
+                "id": recipient_id
+            },
+            "message": {
+                "text": text,
+                "quick_replies": quick_replies
+            }
+        })
+
+        requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
+        self.debt_companies = input()
+
+        print("input method : ", self.debt_companies)
+
 
     def send_image(self, recipient_id, image_url, access_token):
 
