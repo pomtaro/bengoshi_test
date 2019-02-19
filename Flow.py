@@ -361,12 +361,15 @@ class Flow:
                 "method": "decide_consolidation_image"
             },
             {
+                "method": "decide_consolidation_comment"
+            },
+            {
                 "method": "send_message",
                 "text": "チェック結果だよ🤔"
             },
             {
                 "method": "send_image",
-                "image_url": ""  # decide_consolidation_image内でurlを定義している
+                "image_url": "Hello"  # decide_consolidation_image内でurlを定義している
             },
             {
                 "method": "send_message",
@@ -457,6 +460,8 @@ class Flow:
                     self.record_pay_per_month(message_text)
                 elif method == "decide_consolidation_image":
                     self.decide_consolidation_image()
+                elif method == "decide_consolidation_comment":
+                    self.decide_consolidation_comment()
                 elif method == "decide_consolidation_recommendation":
                     self.decide_consolidation_recommendation()
 
@@ -683,11 +688,11 @@ class Flow:
         }
 
         if consolidation_group == "voluntary liquidation":
-            self.flow_dict["見てみる"][2]["image_url"] = urls_dict["voluntary liquidation"]
+            self.flow_dict["見てみる"][3]["image_url"] = urls_dict["voluntary liquidation"]
         elif consolidation_group == "individual rehabilitation":
-            self.flow_dict["見てみる"][2]["image_url"] = urls_dict["individual rehabilitation"]
+            self.flow_dict["見てみる"][3]["image_url"] = urls_dict["individual rehabilitation"]
         elif consolidation_group == "personal bankruptcy":
-            self.flow_dict["見てみる"][2]["image_url"] = urls_dict["personal bankruptcy"]
+            self.flow_dict["見てみる"][3]["image_url"] = urls_dict["personal bankruptcy"]
 
     def decide_consolidation_comment(self):
         consolidation_group = self.decide_consolidation_group(self.debt_prices, self.pay_per_month)
@@ -702,11 +707,11 @@ class Flow:
         }
 
         if consolidation_group == "voluntary liquidation":
-            self.flow_dict["見てみる"][3]["text"] = comments_dict["voluntary liquidation"]
+            self.flow_dict["見てみる"][4]["text"] = comments_dict["voluntary liquidation"]
         elif consolidation_group == "individual rehabilitation":
-            self.flow_dict["見てみる"][3]["text"] = comments_dict["individual rehabilitation"]
+            self.flow_dict["見てみる"][4]["text"] = comments_dict["individual rehabilitation"]
         elif consolidation_group == "personal bankruptcy":
-            self.flow_dict["見てみる"][3]["text"] = comments_dict["personal bankruptcy"]
+            self.flow_dict["見てみる"][4]["text"] = comments_dict["personal bankruptcy"]
 
     def decide_consolidation_recommendation(self):
         consolidation_group = self.decide_consolidation_group(self.debt_prices, self.pay_per_month)
