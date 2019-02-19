@@ -168,11 +168,204 @@ class Flow:
                              "layer3_question.png"
             },
             {
-                "method": "send_quick_reply_tmp",
+                "method": "send_quick_reply",
                 "text": "下から選んでね。",
                 "buttons": ["1社", "2社", "3社以上"]
             }
+        ],
+
+        "1社": [
+            {
+                "method": "record_debt_companies"
+            },
+            {
+                "method": "send_image",
+                "image_url": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer3-5/"
+                             "layer4_question.png"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "下から選んでね。",
+                "buttons": ["0~100万", "100~500万", "500~1000万", "1000~2000万", "2000万以上"]
+            }
+        ],
+
+        "2社": [
+            {
+                "method": "record_debt_companies"
+            },
+            {
+                "method": "send_image",
+                "image_url": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer3-5/"
+                             "layer4_question.png"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "下から選んでね。",
+                "buttons": ["0~100万", "100~500万", "500~1000万", "1000~2000万", "2000万以上"]
+            }
+
+        ],
+
+        "3社以上": [
+            {
+                "method": "record_debt_companies"
+            },
+            {
+                "method": "send_image",
+                "image_url": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer3-5/"
+                             "layer4_question.png"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "下から選んでね。",
+                "buttons": ["0~100万", "100~500万", "500~1000万", "1000~2000万", "2000万以上"]
+            }
+
+        ],
+
+        "0~100万": [
+            {
+                "method": "record_debt_prices"
+            },
+            {
+                "method": "send_image",
+                "image_url": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer3-5/"
+                             "layer5_question.png"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "下から選んでね。",
+                "buttons": ["0~1万", "1~5万", "5~10万", "10万以上"]
+            }
+        ],
+
+        "100~500万": [
+            {
+                "method": "record_debt_prices"
+            },
+            {
+                "method": "send_image",
+                "image_url": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer3-5/"
+                             "layer5_question.png"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "下から選んでね。",
+                "buttons": ["0~1万", "1~5万", "5~10万", "10万以上"]
+            }
+        ],
+
+        "500~1000万": [
+            {
+                "method": "record_debt_prices"
+            },
+            {
+                "method": "send_image",
+                "image_url": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer3-5/"
+                             "layer5_question.png"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "下から選んでね。",
+                "buttons": ["0~1万", "1~5万", "5~10万", "10万以上"]
+            }
+        ],
+
+        "1000~2000万": [
+            {
+                "method": "record_debt_prices"
+            },
+            {
+                "method": "send_image",
+                "image_url": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer3-5/"
+                             "layer5_question.png"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "下から選んでね。",
+                "buttons": ["0~1万", "1~5万", "5~10万", "10万以上"]
+            }
+        ],
+
+        "2000万以上": [
+            {
+                "method": "record_debt_prices"
+            },
+            {
+                "method": "send_image",
+                "image_url": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer3-5/"
+                             "layer5_question.png"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "下から選んでね。",
+                "buttons": ["0~1万", "1~5万", "5~10万", "10万以上"]
+            }
+        ],
+
+        "0~1万": [
+            {
+                "method": "record_pay_per_month"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "質問は終わりだよ！\nセルチェック結果を見てみよう！🤔",
+                "buttons": ["見てみる"]
+            }
+        ],
+
+        "1~5万": [
+            {
+                "method": "record_pay_per_month"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "質問は終わりだよ！\nセルチェック結果を見てみよう！🤔",
+                "buttons": ["見てみる"]
+            }
+        ],
+
+        "5~10万": [
+            {
+                "method": "record_pay_per_month"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "質問は終わりだよ！\nセルチェック結果を見てみよう！🤔",
+                "buttons": ["見てみる"]
+            }
+        ],
+
+        "10万以上": [
+            {
+                "method": "record_pay_per_month"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "質問は終わりだよ！\nセルフチェック結果を見てみよう！🤔",
+                "buttons": ["見てみる"]
+            }
+        ],
+
+        "見てみる": [
+            {
+                "method": "decide_consolidation_image"
+            },
+            {
+                "method": "send_image",
+                "image_url": ""
+            }
         ]
+
     }
 
     def messgage_is(self, message_text):  # メッセージが辞書に存在するか判定
@@ -218,10 +411,15 @@ class Flow:
                     subtitles = self.flow_dict[message_text][item_number]["subtitles"]
                     image_urls = self.flow_dict[message_text][item_number]["image_urls"]
                     self.send_carousel_buttonless(recipient_id, titles, subtitles, image_urls, access_token)
-                elif method == "send_quick_reply_tmp":
-                    text = self.flow_dict[message_text][item_number]["text"]
-                    buttons = self.flow_dict[message_text][item_number]["buttons"]
-                    self.send_quick_reply_tmp(recipient_id, text, buttons, access_token)
+                elif method == "record_debt_companies":
+                    self.record_debt_companies(message_text)
+                elif method == "record_debt_ptices":
+                    self.record_debt_prices(message_text)
+                elif method == "record_pay_per_month":
+                    self.record_pay_per_month(message_text)
+                elif method == "decide_consolidation_image":
+                    self.decide_consolidation_image()
+
 
 
         else:
@@ -277,42 +475,6 @@ class Flow:
         })
 
         requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
-
-    def send_quick_reply_tmp(self, recipient_id, text, buttons, access_token):
-
-        params = {
-            "access_token": access_token
-        }
-        headers = {
-            "Content-Type": "application/json"
-        }
-
-        quick_replies = []
-
-        for button in buttons:
-            quick_dict = {
-                "content_type": "text",
-                "title": button,
-                "payload": "payload: {}".format(button)
-            }
-            quick_replies.append(quick_dict)
-
-        data = json.dumps({
-            "recipient": {
-                "id": recipient_id
-            },
-            "message": {
-                "text": text,
-                "quick_replies": quick_replies
-            }
-        })
-
-        requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
-
-        self.debt_companies = input()
-
-        print("input method : ", self.debt_companies)
-
 
     def send_image(self, recipient_id, image_url, access_token):
 
@@ -376,8 +538,65 @@ class Flow:
 
         requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
+    def record_debt_companies(self, message_text):
+        self.debt_companies = message_text
 
+    def record_debt_prices(self, message_text):
+        self.debt_prices = message_text
 
+    def record_pay_per_month(self, message_text):
+        self.pay_per_month = message_text
 
+    def decide_consolidation_group(self, debt_prices, pay_per_month):
+        if debt_prices == "0~100万":
+            if pay_per_month == "0~1万":
+                return "individual rehabilitation"
+            elif pay_per_month == "1~5万" or pay_per_month == "5~10万" or pay_per_month == "10万以上":
+                return "voluntary liquidation"
+        elif debt_prices == "100~500万":
+            if pay_per_month == "0~1万":
+                return "personal bankruptcy"
+            elif pay_per_month == "1~5万":
+                return "individual rehabilitation"
+            elif pay_per_month == "5~10万" or pay_per_month == "10万以上":
+                return "voluntary liquidation"
+        elif debt_prices == "500~1000万":
+            if pay_per_month == "0~1万":
+                return "personal bankruptcy"
+            elif pay_per_month == "1~5万":
+                return "individual rehabilitation"
+            elif pay_per_month == "5~10万" or pay_per_month == "10万以上":
+                return "voluntary liquidation"
+        elif debt_prices == "1000~2000万":
+            if pay_per_month == "0~1万" or pay_per_month == "1~5万":
+                return "personal bankruptcy"
+            elif pay_per_month == "5~10万" or pay_per_month == "10万以上":
+                return "individual rehabilitation"
+        elif debt_prices == "2000万以上":
+            if pay_per_month == "0~1万" or pay_per_month == "1~5万" or pay_per_month == "5~10万":
+                return "personal bankruptcy"
+            elif pay_per_month == "10万以上":
+                return "individual rehabilitation"
 
+    def decide_consolidation_image(self):
+        consolidation_group = self.decide_consolidation_group(self.debt_prices, self.pay_per_month)
+
+        urls_dict = {
+            "voluntary liquidation": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                                     "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer6/"
+                                     "%E4%BB%BB%E6%84%8F%E6%95%B4%E7%90%86_60%25.png",
+            "individual rehabilitation": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                                         "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer6/"
+                                         "%E5%80%8B%E4%BA%BA%E5%86%8D%E7%94%9F_80%25.png",
+            "personal bankruptcy": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                                   "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer6/"
+                                   "%E8%87%AA%E5%B7%B1%E7%A0%B4%E7%94%A3_100%25.png"
+        }
+
+        if consolidation_group == "voluntary liquidation":
+            self.flow_dict["見てみる"][1]["image_url"] = urls_dict["voluntary liquidation"]
+        elif consolidation_group == "individual rehabilitation":
+            self.flow_dict["見てみる"][1]["image_url"] = urls_dict["individual rehabilitation"]
+        elif consolidation_group == "personal bankruptcy":
+            self.flow_dict["見てみる"][1]["image_url"] = urls_dict["personal bankruptcy"]
 
