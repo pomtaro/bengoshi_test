@@ -18,7 +18,8 @@ class Flow:
             {
                 "method": "send_image",
                 "image_url": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
-                             "%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88/%E3%83%95%E3%82%AF%E3%83%AD%E3%82%A6_test.png"
+                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/"
+                             "%E3%81%9D%E3%81%AE%E4%BB%96/%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3_optimized.png"
             },
             {
                 "method": "send_quick_reply",
