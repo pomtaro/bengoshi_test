@@ -7,6 +7,11 @@ class Flow:
     debt_companies = ""
     debt_prices = ""
     pay_per_month = ""
+    impressions = {
+        "とても良かったよ！": 0,
+        "イマイチだね": 0,
+        "二度と使わない！": 0
+    }
 
     flow_dict = {
         "スタート": [
@@ -399,32 +404,177 @@ class Flow:
                 "image_urls": [],  # decide_consolidation_recommendation内で定義
                 "buttons_titles": [[]]  # decide_consolidation_recommendation内で定義
             }
-        ]
+        ],
 
+        "任意整理を詳しく見る": [
+            {
+                "method": "send_message",
+                "text": "任意整理は一番手軽な借金整理の方法だよ👍"
+            },
+            {
+                "method": "send_carousel_buttonless",
+                "titles": [
+                    "金利なしで元金だけ返済！",
+                    "自分の代わりに交渉してくれる！",
+                    "まずは1つからでもOK！"
+                ],
+                "subtitles": [
+                    "元金だけ返せばよいから、返済の負担がすごく楽になるよ！",
+                    "仕事をしている人でも安心！自分で交渉する必要はないんだ👌",
+                    "任意整理するもの、しないものを選ぶことができるよ！"
+                ],
+                "image_urls": [
+                    "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                    "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer8/"
+                    "%E4%BB%BB%E6%84%8F%E6%95%B4%E7%90%86%E3%81%AE%E6%83%85%E5%A0%B11.png",
+                    "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                    "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer8/"
+                    "%E4%BB%BB%E6%84%8F%E6%95%B4%E7%90%86%E3%81%AE%E6%83%85%E5%A0%B12.png",
+                    "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                    "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer8/"
+                    "%E4%BB%BB%E6%84%8F%E6%95%B4%E7%90%86%E3%81%AE%E6%83%85%E5%A0%B13.png"
+                ]
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "最後に、セルフチェックとぼくのアシスタントぶりはどうだったかな？\nアンケートで教えてほしいな😄",
+                "buttons": ["アンケートに答える"]
+            }
+        ],
+
+        "個人再生を詳しく見る": [
+            {
+                "method": "send_message",
+                "text": "個人再生は財産を残しながら借金を大幅に減額できることが特徴だよ👍"
+            },
+            {
+                "method": "send_carousel_buttonless",
+                "titles": [
+                    "原則、借金を1/5に！",
+                    "財産を手元に残すことができる！",
+                    "債権者からの強制執行を止めることができる！"
+                ],
+                "subtitles": [
+                    "元金のすべてを返さなくていい！減らした借金を分割で返済しよう。",
+                    "大事な財産を手放す必要はない！安心して借金返済に集中できる。",
+                    "取り立てはもちろん、給料の差し止めなども止めることができる。"
+                ],
+                "image_urls": [
+                    "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                    "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer8/"
+                    "%E5%80%8B%E4%BA%BA%E5%86%8D%E7%94%9F%E3%81%AE%E6%83%85%E5%A0%B11.png",
+                    "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                    "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer8/"
+                    "%E5%80%8B%E4%BA%BA%E5%86%8D%E7%94%9F%E3%81%AE%E6%83%85%E5%A0%B12.png",
+                    "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                    "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer8/"
+                    "%E5%80%8B%E4%BA%BA%E5%86%8D%E7%94%9F%E3%81%AE%E6%83%85%E5%A0%B13.png"
+                ]
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "最後に、セルフチェックとぼくのアシスタントぶりはどうだったかな？\nアンケートで教えてほしいな😄",
+                "buttons": ["アンケートに答える"]
+            }
+
+        ],
+
+        "自己破産を詳しく見る": [
+            {
+                "method": "send_message",
+                "text": "自己破産は借金を全て無くせることが特徴だよ👍"
+            },
+            {
+                "method": "send_carousel_buttonless",
+                "titles": [
+                    "借金を帳消し！",
+                    "債権者からの強制執行を止めることができる！",
+                    "生活に必要な最低限の資産は残せる！"
+                ],
+                "subtitles": [
+                    "借金がどれだけあっても関係なし！1からやり直そう👌",
+                    "取り立てはもちろん、給料の差し止めなども止めることができる。",
+                    "身ぐるみ剥がされる訳ではない！最低限のものは残すことができるんだ。"
+                ],
+                "image_urls": [
+                    "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                    "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer8/"
+                    "%E8%87%AA%E5%B7%B1%E7%A0%B4%E7%94%A3%E3%81%AE%E6%83%85%E5%A0%B11.png",
+                    "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                    "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer8/"
+                    "%E8%87%AA%E5%B7%B1%E7%A0%B4%E7%94%A3%E3%81%AE%E6%83%85%E5%A0%B12.png",
+                    "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                    "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer8/"
+                    "%E8%87%AA%E5%B7%B1%E7%A0%B4%E7%94%A3%E3%81%AE%E6%83%85%E5%A0%B13.png"
+                ]
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "最後に、セルフチェックとぼくのアシスタントぶりはどうだったかな？\nアンケートで教えてほしいな😄",
+                "buttons": ["アンケートに答える"]
+            }
+
+        ],
+
+        "アンケートに答える": [
+            {
+                "method": "send_message",
+                "text": "ありがとう😄"
+            },
+            {
+                "method": "send_image",
+                "image_url": "https://raw.githubusercontent.com/pomtaro/bengoshi_test/master/pic_bot/"
+                             "%E5%80%9F%E9%87%91%E3%83%9C%E3%83%83%E3%83%88%E7%94%BB%E5%83%8F/layer9/"
+                             "%E3%82%A2%E3%83%B3%E3%82%B1%E3%83%BC%E3%83%88.png"
+            },
+            {
+                "method": "send_quick_reply",
+                "text": "下から選んでね。",
+                "buttons": ["とても良かったよ！", "イマイチだね", "二度と使わない！"]
+            }
+        ],
+
+        "とても良かったよ": [
+            {
+                "method": "record_impression"
+            }
+        ],
+
+        "イマイチだね": [
+            {
+                "method": "record_impression"
+            }
+        ],
+
+        "二度と使わない！": [
+            {
+                "method": "record_impression"
+            }
+        ]
     }
 
-    def messgage_is(self, message_text):  # メッセージが辞書に存在するか判定
+    def message_is(self, message_text):  # メッセージが辞書に存在するか判定
         if message_text in self.flow_dict.keys():
             return True
         else:
             return False
 
     def read_item_numbers(self, message_text):  # 要素数を判定
-        if self.messgage_is(message_text):
+        if self.message_is(message_text):
             item_numbers = len(self.flow_dict[message_text])
             return item_numbers
         else:
             return False
 
     def read_method(self, message_text, item_number):  # methodを判定する
-        if self.messgage_is(message_text):
+        if self.message_is(message_text):
             method = self.flow_dict[message_text][item_number]["method"]
             return method
         else:
             return False
 
     def execute_method(self, recipient_id, message_text, access_token):
-        if self.messgage_is(message_text):
+        if self.message_is(message_text):
 
             item_numbers = self.read_item_numbers(message_text)
 
@@ -464,6 +614,8 @@ class Flow:
                     self.decide_consolidation_comment()
                 elif method == "decide_consolidation_recommendation":
                     self.decide_consolidation_recommendation()
+                elif method == "record_impression":
+                    self.record_impression(message_text)
 
 
 
@@ -764,7 +916,7 @@ class Flow:
                                                        urls_dict["voluntary liquidation_other"],
                                                        urls_dict["personal bankruptcy_other"]]
             self.flow_dict["確認する"][2]["buttons_titles"] = [["個人再生を詳しく見る"],
-                                                            ["任意整理を詳しく見る"],
+                                                           ["任意整理を詳しく見る"],
                                                            ["自己破産を詳しく見る"]]
         elif consolidation_group == "personal bankruptcy":
             self.flow_dict["確認する"][2]["titles"] = ["自己破産",
@@ -775,11 +927,16 @@ class Flow:
                                                       "個人再生は財産を残しながら借金を大きく減らすことができるんだ。"]
             self.flow_dict["確認する"][2]["image_urls"] = [urls_dict["personal bankruptcy_recommended"],
                                                        urls_dict["voluntary liquidation_other"],
-                                                       urls_dict["personal bankruptcy_other"]]
+                                                       urls_dict["individual rehabilitation_other"]]
             self.flow_dict["確認する"][2]["buttons_titles"] = [["自己破産を詳しく見る"],
-                                                           ["個人再生を詳しく見る"],
-                                                           ["任意整理を詳しく見る"]]
+                                                           ["任意整理を詳しく見る"],
+                                                           ["個人再生を詳しく見る"]]
 
-
-
+    def record_impression(self, message_text):
+        if message_text == "とても良かったよ！":
+            self.impressions["とても良かったよ！"] = self.impressions["とても良かったよ！"] + 1
+        elif message_text == "イマイチだね":
+            self.impressions["イマイチだね"] = self.impressions["イマイチだね"] + 1
+        elif message_text == "二度と使わない！":
+            self.impressions["二度と使わない！"] = self.impressions["二度と使わない！"] + 1
 
