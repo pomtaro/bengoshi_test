@@ -318,7 +318,7 @@ class Flow:
             },
             {
                 "method": "send_quick_reply",
-                "text": "質問は終わりだよ！\nセルチェック結果を見てみよう！🤔",
+                "text": "質問は終わりだよ！\nセルフチェック結果を見てみよう！🤔",
                 "buttons": ["見てみる"]
             }
         ],
@@ -329,7 +329,7 @@ class Flow:
             },
             {
                 "method": "send_quick_reply",
-                "text": "質問は終わりだよ！\nセルチェック結果を見てみよう！🤔",
+                "text": "質問は終わりだよ！\nセルフチェック結果を見てみよう！🤔",
                 "buttons": ["見てみる"]
             }
         ],
@@ -340,7 +340,7 @@ class Flow:
             },
             {
                 "method": "send_quick_reply",
-                "text": "質問は終わりだよ！\nセルチェック結果を見てみよう！🤔",
+                "text": "質問は終わりだよ！\nセルフチェック結果を見てみよう！🤔",
                 "buttons": ["見てみる"]
             }
         ],
@@ -362,7 +362,7 @@ class Flow:
             },
             {
                 "method": "send_image",
-                "image_url": ""
+                "image_url": "Hello"
             }
         ]
 
@@ -599,4 +599,6 @@ class Flow:
             self.flow_dict["見てみる"][1]["image_url"] = urls_dict["individual rehabilitation"]
         elif consolidation_group == "personal bankruptcy":
             self.flow_dict["見てみる"][1]["image_url"] = urls_dict["personal bankruptcy"]
+
+        print(self.flow_dict["見てみる"][1]["image_url"])
 
