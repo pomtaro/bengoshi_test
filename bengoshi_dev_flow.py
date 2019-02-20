@@ -7,17 +7,26 @@ import requests
 from flask import Flask, request
 from datetime import datetime
 from Flow import Flow
+from Get_started import Getstarted
 
 app = Flask(__name__)
 
 ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 VERIFY_TOKEN = os.environ["VERIFY_TOKEN"]
 
-lawyer_id = '2230490113648972'  # こじま'2316784358340526'
+# idメモ
+"""
+ひがし：2476256932448282
+"""
 
 # Flowクラスの初期化
 flow = Flow()
 
+# Getstartedクラスの初期化
+getstarted = Getstarted()
+getstarted.send_get_started(ACCESS_TOKEN)
+
+"""
 def send_get_started():
     params = {
         "access_token": ACCESS_TOKEN
@@ -46,7 +55,7 @@ def send_get_started():
 
 
 send_get_started()
-
+"""
 
 @app.route('/', methods=['GET'])
 def verify():
