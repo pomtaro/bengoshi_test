@@ -10,8 +10,8 @@ from Flow import Flow
 
 app = Flask(__name__)
 
-ACCESS_TOKEN = 'EAAHZBLbwxSdQBAD2W7I4HWqobjl3WavuH1ZBw0PLE98L6lnYZCRrfVr9YVkzuNgDwl2LwavCeh26jrwthM4yb3nZAxPHkDMqBHXRRzEC4VM1koJmSsCHiJ4PROBprossElEBpvnb9H3BFrBZCqNmyIn656mOmOK1gKCsUAJXVhwZDZD'
-VERIFY_TOKEN = 'Verify_Token_Dev'
+ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
+VERIFY_TOKEN = os.environ["VERIFY_TOKEN"]
 
 lawyer_id = '2230490113648972'  # こじま'2316784358340526'
 
